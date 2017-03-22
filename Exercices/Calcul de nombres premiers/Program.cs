@@ -12,43 +12,54 @@ namespace Calcul_de_nombres_premiers
         {
 
             int n;
-            int compt, divis,nbr;
-            Boolean estPremier;
 
             Console.WriteLine("Combien de nombres premiers: ");
             string valeur = Console.ReadLine();
             n = int.Parse(valeur);
-
-            /*if (n == 0) Console.WriteLine("Pas de nombres premiers");
-            if (n == 1) Console.WriteLine('\n' + 1);
-            else*/
+            while (n != 0)
             {
-                Console.WriteLine(2);
-                compt = 1;
-                nbr = 3;
-                while (compt < n)
-                {
+                /*if (n == 0) Console.WriteLine("Pas de nombres premiers");
+                if (n == 1) Console.WriteLine('\n' + 1);
+                else*/
+                CalculerNbPremiers(n);
+                //CalculerNbPremiers(6);
+                //CalculerNbPremiers(18);
+                Console.WriteLine("Combien de nombres premiers: ");
+                valeur = Console.ReadLine();
+                n = int.Parse(valeur);
+            }
+
+           Console.ReadKey();
+        }
+
+        static void CalculerNbPremiers(int nbpremiers)
+        {
+            int compt, divis, nbr;
+            Boolean estPremier;
+            Console.WriteLine(2);
+            compt = 0;
+            nbr = 3;
+            while (compt < nbpremiers - 1)
+            {
                 divis = 2;
                 estPremier = true;
 
-                    do
-                    {
-                        if (nbr % divis == 0) estPremier = false;
-                        else divis += 2;
-                    }
-                    while ((divis > nbr / 2) || (estPremier == false));
-
-                    if (estPremier)
-                    {
-                        Console.WriteLine(nbr);
-                        compt++;
-                    }
-                    nbr += 2;
+                do
+                {
+                    if (nbr % divis == 0) estPremier = false;
+                    else divis += 1;
                 }
+                //while ((divis > nbr / 2) || (estPremier == false));// Condition pas bonne, "estpremier" est tjrs = false
+                while ((divis <= nbr / 2) && (estPremier == true));
 
+                if (estPremier)
+                {
+                    compt++;
+                    Console.WriteLine(nbr);
+                }
+                nbr ++;
             }
 
-            Console.ReadKey();
         }
     }
 }
