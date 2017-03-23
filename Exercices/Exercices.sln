@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calcul de nombres premiers"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tri_d_un_tableau", "Tri_d_un_tableau\Tri_d_un_tableau.csproj", "{BC142350-0DB2-4C98-8E63-1563FF92F3D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comptage_Voyelles_Consonnes", "Comptage_Voyelles_Consonnes\Comptage_Voyelles_Consonnes.csproj", "{0881687B-0E09-444E-84AB-FE1F00A246BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login", "Login\Login.csproj", "{0FF3511E-E236-4F23-A994-1CE9780A0B7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{BC142350-0DB2-4C98-8E63-1563FF92F3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC142350-0DB2-4C98-8E63-1563FF92F3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC142350-0DB2-4C98-8E63-1563FF92F3D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0881687B-0E09-444E-84AB-FE1F00A246BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0881687B-0E09-444E-84AB-FE1F00A246BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0881687B-0E09-444E-84AB-FE1F00A246BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0881687B-0E09-444E-84AB-FE1F00A246BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FF3511E-E236-4F23-A994-1CE9780A0B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF3511E-E236-4F23-A994-1CE9780A0B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF3511E-E236-4F23-A994-1CE9780A0B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF3511E-E236-4F23-A994-1CE9780A0B7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
