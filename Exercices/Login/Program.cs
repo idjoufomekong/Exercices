@@ -11,39 +11,58 @@ namespace Login
         static void Main(string[] args)
         {
             string login, mdp;
-            bool resultLogin;
+            bool resultLogin, resultMdp;
 
             Console.WriteLine("Saisir login: ");
             login = Console.ReadLine();
 
+            //resultLogin = false;
+
             try
             {
-             do resultLogin=VerifierLogin(login);
-                while (resultLogin == false) ; 
+                resultLogin = VerifierLogin(login);
             }
             catch (FormatException e)
             {
-               Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
+                resultLogin = false;
             }
-           
-                   
-            Console.WriteLine("Saisir le mot de passe: ");
+
+            while (resultLogin == false)
+            {
+                Console.WriteLine("Saisir à nouveau le login: ");
+                login = Console.ReadLine();
+
+                try
+                {
+                    resultLogin = VerifierLogin(login);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            resultMdp = false;
+            while (resultMdp == false)
+            {
+                Console.WriteLine("Saisir le mot de passe: ");
             mdp = Console.ReadLine();
-            
+
             try
             {
-                VerifierMdp(mdp);
+                    resultMdp=VerifierMdp(mdp);
             }
             catch (FormatException e)
             {
                 Console.WriteLine(e.Message);
             }
-
+        }
 
 
             Console.WriteLine("Votre compte a bien été créé. Un message vient de vous être envoyé");
             Console.ReadKey();
-            
+
         }
 
         static bool VerifierLogin(string mot)
@@ -58,10 +77,15 @@ namespace Login
 
         }
 
-        static void VerifierMdp(string mdp)
+        static bool VerifierMdp(string mdp)
         {
-            if((mdp.Length<6)|| (mdp.Length >12)|| (mdp[0]==' ') || (mdp[mdp.Length-1] == ' '))
+            bool result = true;
+            if ((mdp.Length < 6) || (mdp.Length > 12) || (mdp[0] == ' ') || (mdp[mdp.Length - 1] == ' '))
+            {
+                result = false;
                 throw new FormatException("Le mot de passe ne respecte pas les conditions");
+            }
+            return result;
         }
 
     }
