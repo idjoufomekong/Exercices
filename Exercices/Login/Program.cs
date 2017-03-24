@@ -35,7 +35,8 @@ namespace Login
 
                 try
                 {
-                    resultLogin = VerifierLogin(login);
+                    resultLogin = VerifierLogin(login);//il n'est pas nécessaire que la fonction renvoie quelque chose car l'exception traite déjà s'il y a un retour ou pas
+                    //on retourne un paramètre pour l'utiliser et pas pour vérifier s'il y a eu erreur ou pas
                 }
                 catch (FormatException e)
                 {
@@ -51,7 +52,8 @@ namespace Login
 
             try
             {
-                    resultMdp=VerifierMdp(mdp);
+                    VerifierMdp(mdp);
+                    resultMdp = true;
             }
             catch (FormatException e)
             {
@@ -71,21 +73,35 @@ namespace Login
             if (mot.Length < 5)
             {
                 result = false;
-                throw new FormatException("Taille insuffisante du login");
+                throw new FormatException("Taille insuffisante du login");// Mettre un message le plus précis possible
             }
             return result;
 
         }
 
-        static bool VerifierMdp(string mdp)
+        static void VerifierMdp(string mdp)// il n'est pas nécessaire de renvoyer quelque chose
         {
             bool result = true;
-            if ((mdp.Length < 6) || (mdp.Length > 12) || (mdp[0] == ' ') || (mdp[mdp.Length - 1] == ' '))
+            //if ((mdp.Length < 6) || (mdp.Length > 12) || (mdp[0] == ' ') || (mdp[mdp.Length - 1] == ' '))
+            //{
+            //    result = false;
+            //    throw new FormatException("Le mot de passe ne respecte pas les conditions");
+            //}
+            //return result;
+
+            if ((mdp.Length < 6) || (mdp.Length > 12))
             {
                 result = false;
-                throw new FormatException("Le mot de passe ne respecte pas les conditions");
+                throw new FormatException("Le mot de passe doit contenir  entre 6 et 12 caractères");
             }
-            return result;
+            //return result;
+
+            if ((mdp[0] == ' ') || (mdp[mdp.Length - 1] == ' '))
+            {
+                result = false;
+                throw new FormatException("Le mot de passe ne doit pas commencer ou finir par un espace");
+            }
+           // return result;
         }
 
     }
