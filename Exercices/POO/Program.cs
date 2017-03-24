@@ -11,7 +11,7 @@ namespace POO
         static void Main(string[] args)
         {
             DateTime dt = new DateTime(2017, 02, 25);
-            CompteBancaire cb = new CompteBancaire(dt,typeCompte.Courant);//instanciation de la classe CompteBancaire
+            CompteBancaire cb = new CompteBancaire(typeCompte.Courant);//instanciation de la classe CompteBancaire
             bool b=cb.ADécouvert;//Pas besoin de parenthèse pour appeler la propriété
 
             cb.DécouvertAutorisé = -700;
