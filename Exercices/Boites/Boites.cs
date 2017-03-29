@@ -8,7 +8,7 @@ namespace Boites
 {
     public enum Couleurs { blanc, bleu, vert, jaune, orange, rouge, marron }
     public enum Matières { carton, plastique, bois, métal }
-    class Boite
+    public class Boite
     {
         #region Champs privés
         private double _hauteur;
