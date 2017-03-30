@@ -13,6 +13,8 @@ namespace Vehicules
         public int NbRoues { get; set; }
         public Energies Energie { get; set; }
         public abstract int PRK { get;  }
+        public double Prix { get; private set; }
+
         public virtual string Description
         {
             get
@@ -29,6 +31,12 @@ namespace Vehicules
             this.NbRoues = nbRoues;
             Energie = energie;
         }
+
+        public Véhicule(string nom, double prix)
+        {
+            Nom = nom;
+            Prix = prix;
+        }
         #endregion
 
         #region Méthodes publiques
@@ -43,10 +51,10 @@ namespace Vehicules
         {
             if (obj is Véhicule)//Car si l'objet n'est pas un véhicule le programme va crasher
             {
-                Véhicule comparaison = (Véhicule)obj;
-                if (this.PRK < comparaison.PRK)
+                Véhicule v = (Véhicule)obj;
+                if (Prix < v.Prix)
                     return -1;
-                else if (this.PRK > comparaison.PRK)
+                else if (Prix > v.Prix)
                     return 1;
                 else
                     return 0;
@@ -98,6 +106,10 @@ namespace Vehicules
         {
 
         }
+        public Voiture(string nom, double prix): base(nom,prix)
+        {
+
+        }
 
         #region Méthodes publiques
         public override string ToString()
@@ -139,6 +151,10 @@ namespace Vehicules
         }
         #endregion
         public Moto(string nom, Energies energie) : base(nom, NB_ROUES_MOTO, energie)
+        {
+
+        }
+        public Moto(string nom,double prix): base(nom,prix)
         {
 
         }

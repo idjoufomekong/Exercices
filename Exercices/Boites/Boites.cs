@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections;
 
 namespace Boites
 {
@@ -31,6 +28,7 @@ namespace Boites
            // _longueur = 30.0;
            //Matière = Matières.carton; //Le private set n'est pas obligatoire
             _compteur++;
+            Articles = new SortedDictionary<string, Article>();
 
         }
 
@@ -48,6 +46,7 @@ namespace Boites
         }
 
         #region Propriétés
+        public SortedDictionary<string,Article> Articles { get; }
         public double Hauteur
         {
             get { return _hauteur; }
