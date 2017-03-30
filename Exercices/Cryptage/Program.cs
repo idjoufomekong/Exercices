@@ -10,6 +10,14 @@ namespace Cryptage
     {
         static void Main(string[] args)
         {
+            string s = @"../../cle.txt";
+            if(Cryptage.ChargerClé(s))
+                Console.WriteLine("Fichier ouvert");
+                
+            string v = "valeur";
+            Console.WriteLine(Cryptage.Crypter(v));
+            Console.WriteLine("noveau mot; {0}", v);
+            Console.ReadKey();
         }
     }
 }

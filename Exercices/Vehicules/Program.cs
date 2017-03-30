@@ -79,13 +79,13 @@ namespace Vehicules
             Console.WriteLine("liste1");
             foreach (var a in ListVéhicule1)
             {
-                Console.WriteLine("Nom: {0} prix: {1}€", a.Key.Prix, a.Value);
+                Console.WriteLine("Nom: {0} prix: {1}€", a.Key.Nom, a.Key.Prix);
             }
 
             Console.WriteLine("Résultat recherche");
             string[] tabChaine = {"Clio","Mégane", "Golf", "Enzo", "Polo" };
 
-            for(int i=0; i<tabChaine.Length; i++)
+            /*for(int i=0; i<tabChaine.Length; i++)
             {
                 string v = tabChaine[i];
                 foreach(var a in Véhicules)
@@ -93,6 +93,12 @@ namespace Vehicules
                     if (v.CompareTo(a.Key) == 0)
                         Console.WriteLine("Nom: {0} prix: {1}€", a.Key, a.Value.Prix);
                 }
+            }*/
+            foreach(var s in tabChaine)
+            {
+                Vehicule v;
+                if(Véhicules.TryGetValue(s,out v))
+                    Console.WriteLine("Nom: {0} Prix: {1}",v.Nom, v.Prix);
             }
 
             Console.ReadKey();
