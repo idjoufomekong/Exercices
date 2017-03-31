@@ -9,7 +9,8 @@ namespace Cryptage
 {
     public static class Cryptage
     {
-        public static Dictionary<char,char> _dico = new Dictionary<char, char>();
+        //Créer régions
+        public static Dictionary<char,char> _dico = new Dictionary<char, char>();//Mieux choisir le nom
         
 
         public static bool ChargerClé(string s)
@@ -59,13 +60,14 @@ namespace Cryptage
         public static string Crypter(string b)
             {
             char c;
-            string s=b;
+            char[] s= b.ToCharArray();
+
                 for(int i=0; i<s.Length;i++)
                 {
                 if( _dico.TryGetValue(s[i],out c))
                     s[i] = c;
                 }
-                return s;
+                return new string(s);
             }
     }
 }
