@@ -55,7 +55,7 @@ namespace AnalyseurLINQ
                 }
             }
         }
-
+        
         public void AfficherStats()
         {
             // mois de la température min la plus basse
@@ -86,6 +86,34 @@ namespace AnalyseurLINQ
                 Console.WriteLine("La précipitation moyenne de l'année {0}: {1}mm", an, pre);
 
             }
+        }
+
+             public void RAfficherStats()
+        {
+            // mois de la température min la plus basse
+            var t = Data.Min(c => c.TMin);
+            var m = Data.Where(c => c.TMin == t); 
+            
+                Console.WriteLine("nombre de mois: {0}",m.Count());
+            for(int i=0; i<m.Count(); i++)
+                Console.WriteLine("mois: {0:m}", m.ElementAt(i).Mois);
+                   
+            // Sommes des précipitations de l'année 2016
+            var p = Data.Where(v => v.Mois.Year == 2016).Sum(v => v.Précipitations);
+            Console.WriteLine("La somme des précipitations de 2016 est: {0}", p);
+            
+
+            // Durée d'ensoleillement moyenne du mois de Juillet sur toutes les années
+            var q = Data.Where(c => c.Mois.Month == 07).Average(c => c.Ensoleillement);
+            Console.WriteLine("ensoleillement juillet est : {0}", q);
+            // Précipitations moyennes par année
+            var r = Data.Select(x => x.Mois.Year).Distinct();
+            foreach (var a in r)
+                {
+                   var u = Data.Where(c => c.Mois.Year == a).Average(c => c.Précipitations);
+                Console.WriteLine("année: {0}, moyenne: {1}", a,u);
+                }
+           
 
 
         }

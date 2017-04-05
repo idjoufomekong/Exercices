@@ -12,7 +12,7 @@ namespace AnalyseurLINQ
         {
             var al = new AnalyseurLINQ();
             al.ChargerDonnées();
-            al.AfficherStats();
+            al.RAfficherStats();
             Console.ReadKey();
         }
     }

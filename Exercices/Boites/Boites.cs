@@ -21,6 +21,7 @@ namespace Boites
         /// <summary>
         /// création d'une instance de la classe "Boite"
         /// </summary>
+        
         public Boite()
         {
            // _hauteur = 30.0;
@@ -31,7 +32,7 @@ namespace Boites
             Articles = new SortedDictionary<string, Article>();
 
         }
-
+        
         public Boite(double haut, double larg, double longr):this()
         {
             _hauteur = haut;

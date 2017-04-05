@@ -11,12 +11,13 @@ namespace Cryptage
         static void Main(string[] args)
         {
             string s = @"../../cle.txt";
-            if(Cryptage.ChargerClé(s))
-                Console.WriteLine("Fichier ouvert");
-                
+            Cryptage.ChargerClé(s);
+                                
             string v = "valeur";
-            Console.WriteLine(Cryptage.Crypter(v));
-            Console.WriteLine("noveau mot; {0}", v);
+            Console.WriteLine("Le mot {0} est transformé en: {1}", v, Cryptage.Crypter(v));
+
+            string c = "vewyfs";
+            Console.WriteLine("Le mot {0} est transformé en: {1}", c, Cryptage.Décrypter(c));
             Console.ReadKey();
         }
     }
