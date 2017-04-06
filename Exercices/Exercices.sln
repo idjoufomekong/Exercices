@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comptage_Voyelles_Consonnes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login", "Login\Login.csproj", "{0FF3511E-E236-4F23-A994-1CE9780A0B7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO", "POO\POO.csproj", "{DF4E89D1-B210-47EA-B997-BA3097E8C468}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO1", "POO\POO1.csproj", "{DF4E89D1-B210-47EA-B997-BA3097E8C468}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boites", "Boites\Boites.csproj", "{2520E6BC-82B8-429F-A6E4-CF0A279B4609}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statuts", "Statuts\Statuts.csproj", "{F3C16DD5-5CD9-4568-99A2-3A2D4F1EF5C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyseurLINQ", "AnalyseurLINQ\AnalyseurLINQ.csproj", "{8925E0E0-EFAC-4D4C-B364-67B26DFC4CF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO", "C:\Users\idjoufomekong\Downloads\Exercices-master\Exercices-master\Console\POO\POO.csproj", "{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{8925E0E0-EFAC-4D4C-B364-67B26DFC4CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8925E0E0-EFAC-4D4C-B364-67B26DFC4CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8925E0E0-EFAC-4D4C-B364-67B26DFC4CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
