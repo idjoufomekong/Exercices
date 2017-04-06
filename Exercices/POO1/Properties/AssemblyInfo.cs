@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("POO")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Isagri")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("POO")]
-[assembly: AssemblyCopyright("Copyright © Isagri 2017")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2977bd2e-1c80-4ff8-98b5-e96187bcbfb1")]
+[assembly: Guid("df4e89d1-b210-47ea-b997-ba3097e8c468")]
 
 // Version information for an assembly consists of the following four values:
 //

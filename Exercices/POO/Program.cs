@@ -1,145 +1,163 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace POO
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            DateTime dt = new DateTime(2017, 02, 25);
-            CompteBancaire cb = new CompteBancaire(typeCompte.Courant);//instanciation de la classe CompteBancaire
-            bool b=cb.ADécouvert;//Pas besoin de parenthèse pour appeler la propriété
+	class Program
+	{
+		static void Main(string[] args)
+		{
+            //TesterDistributeur();
+            //TesterCompteBancaire();
+            //TesterMoyensPaiement();
+            //TesterDécorateursCompte();
+            TesterDécorateurDistributeur();
 
-            cb.DécouvertAutorisé = -700;
-            cb.Créditer(1000);
-            Console.WriteLine("Solde courant:{0}", cb.SoldeCourant);
-
-            cb.Débiter(600);
-            Console.WriteLine("Solde courant:{0}", cb.SoldeCourant);
-
-            cb.Débiter(2000);
-            Console.WriteLine("Solde courant:{0}", cb.SoldeCourant);
-
-            CompteBancaire ce = new CompteBancaire( typeCompte.Epargne);
-            CompteBancaire[] tabComptes = new POO.CompteBancaire[3];
-            tabComptes[0] = new CompteBancaire(typeCompte.Courant);
-            tabComptes[1] = new CompteBancaire(DateTime.Today,500);//Il est possible de mettre 2 constructeurs différents dan sle même tableau
-            tabComptes[2] = new CompteBancaire(typeCompte.Courant);
 
             Console.ReadKey();
-        }
-    }
+		}
 
-    public enum typeCompte { Courant, Epargne, PEA, PEE}//Type enumere, doit être déclaré avant hors d'une classe
+		static void TesterCompteBancaire()
+		{
+			CompteBancaire[] tabComptes = new CompteBancaire[2];
+			DateTime dt = new DateTime(2016, 2, 25);
+			tabComptes[0] = new CompteBancaire(654654165, dt, 500);
+			tabComptes[1] = new CompteBancaire(9898745646);
 
-    public class CompteBancaire
-    {
-        #region Champs privés
-        private bool _aDécouvert;
-        private DateTime _dateCréation;
-        private DateTime _dateCloture;
-        private decimal  _soldeCourant;
-        private decimal _decouvertAutorisé;
-        private typeCompte _type;
-        #endregion
+			tabComptes[1].DécouvertAutorisé = -700;
+			tabComptes[1].Créditer(1000);
+			Console.WriteLine("Solde courant : {0}", tabComptes[1].SoldeCourant);
 
-        /// <summary>
-        /// Création d'un compte
-        /// </summary>
-        public CompteBancaire()//Pas de type de retour
+			tabComptes[1].Débiter(600);
+			Console.WriteLine("Solde courant : {0}", tabComptes[1].SoldeCourant);
+
+			tabComptes[1].Débiter(1000);
+			Console.WriteLine("Solde courant : {0}", tabComptes[1].SoldeCourant);
+
+			// Le débit suivant produit une exception car le solde du compte
+			// est en-dessous du découvert autorisé
+			try
+			{
+				tabComptes[1].Débiter(100);
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				Console.WriteLine("Opération impossible car pas assez d'argent sur le compte");
+			}
+
+			// Création d'une carte
+			//Carte carte = new Carte
+			//{
+			//    NumCarte = 7539514569871234,
+			//    CodeSecret = 1234,
+			//    CodeVérif = 951,
+			//    DateExpiration = DateTime.Today.AddYears(2)
+			//};
+
+			//// Association de cette carte au compte (agrégation)
+			//tabComptes[1].AjouterCarte(carte);
+		}
+
+		static void TesterDécorateursCompte()
+		{
+			CompteBancaire cb = new CompteBancaire(156146, DateTime.Today, 200);
+			cb.DécouvertAutorisé = -1000;
+
+			Console.WriteLine("Valeur du compte : {0}", cb.ValeurCompte);
+
+			// Crée un compte surveillable, qui encapsuble un compte bancaire ordinaire
+			// en lui associant des seuils d'alertes
+			Surveillable compteSurveillable = new Surveillable(cb, -500, 1000);
+			Console.WriteLine(compteSurveillable.EtatCompte);
+
+			cb.Débiter(1000);
+			Console.WriteLine();
+			Console.WriteLine("Valeur du compte : {0}", cb.ValeurCompte);
+			Console.WriteLine(compteSurveillable.EtatCompte);
+
+			cb.Créditer(3000);
+			Console.WriteLine();
+			Console.WriteLine("Valeur du compte : {0}", cb.ValeurCompte);
+			Console.WriteLine(compteSurveillable.EtatCompte);
+
+			Console.WriteLine();
+			Convertible compteConvertible = new Convertible(cb);
+			Console.WriteLine("Valeur du compte en Yuan : {0}", compteConvertible.ValeurEnYuans);
+		}
+
+        static void TesterDécorateurDistributeur()
         {
-            _dateCréation = DateTime.Today;
-        }
-        /// <summary>
-        /// Création d'un compte avec date de création
-        /// </summary>
-        /// <param name="dateCréa">Date de création</param>
-        public CompteBancaire(typeCompte type)//Surcharge de la méthode
-        {
-            _dateCréation = DateTime.Today;
-            _type = type;
+            DistributeurBoisson distrib = new DistributeurBoisson();
+            distrib.Paiement = 200m;
+            Controlable distribcontrolable = new Controlable(distrib, 1m, 150m);
+            Console.WriteLine("Le paiement entré est {0}", distribcontrolable.MontantMax);
+            Console.WriteLine("{0}", distribcontrolable.EtatPaiement);
+           
         }
 
-        /// <summary>
-        /// Création d'un compte avec date de création et solde
-        /// </summary>
-        /// <param name="dateCréa">dateCréa</param>
-        /// <param name="solde">solde initial</param>
-        public CompteBancaire(DateTime dateCréa, decimal solde)
-        {
-            _dateCréation = dateCréa;
-            _soldeCourant = SoldeCourant;
-        }
-        #region Propriétés
-        public bool ADécouvert //Il a généré automatiquement les accesseurs. Groupe de 2 fonctions: get et set
-        {
-            get { return _aDécouvert; }
-        }
+		static void TesterMoyensPaiement()
+		{
+			MoyenPaiment carte = new Carte(101)
+			{
+				NomTitulaire = "Gabin",
+				PrénomTitulaire = "Jean",
+				CodeSecret = 9999,
+				DateExpiration = new DateTime(2017, 09, 30)
+			};
 
-        public DateTime DateCloture
-        {
-            get { return _dateCloture; }
-        }
+			MoyenPaiment chq = new Chéquier(102)
+			{
+				NomTitulaire = "Delon",
+				PrénomTitulaire = "Alain",
+				NumPremierChèque = 102001
+			};
 
-        public DateTime DateCréation
-        {
-            get { return _dateCréation; }
-        }
+			Console.WriteLine(carte.ToString());
+			Console.WriteLine(chq.ToString());
+			Console.WriteLine();
+			DateTime dateRenou = new DateTime(2016, 02, 25);
+			carte.Renouveler(dateRenou);
+			chq.Renouveler(new DateTime(2016, 05, 21));
+			Console.WriteLine(carte.ToString());
+			Console.WriteLine(chq.ToString());
 
-        public decimal SoldeCourant
-        {
-            get { return _soldeCourant; }
-        }
+			Console.WriteLine();
 
-        public decimal  DécouvertAutorisé
-        { get { return _decouvertAutorisé; }
-          set { _decouvertAutorisé = value; }//value mot clé permettant de modifier le champ concerné
-        }
-        #endregion
+			//MoyenPaiment[] tabMP = new MoyenPaiment[4];
+			//tabMP[0] = new Carte(456);
+			//tabMP[1] = new Chéquier(456);
+			//tabMP[2] = new Carte(789);
+			//tabMP[3] = new Chéquier(789);
 
-        #region Méthodes privées
-        private int CalculerAncienneté()
-        {
-            return (DateTime.Today - _dateCréation).Days;
-        }
+			//for (int i = 0; i < tabMP.Length; i++)
+			//{
+			//    Console.WriteLine(tabMP[i].ToString());
+			//    Console.WriteLine(tabMP[i].Payer());
+			//}
+		}
 
-        private decimal CalculerIntérêts()
-        {
-            return 0;
-        }
+		static void TesterDistributeur()
+		{
+			DistributeurBoisson distrib = new DistributeurBoisson();
+			distrib.Paiement = 0.30m; // la valeur étant de type décimal, on met un m
+			try
+			{
+				distrib.BoissonSélectionnée = Boissons.CaféCrème;
+			}
+			catch (InvalidOperationException e)
+			{
+				Console.WriteLine(e.Message);
+				Console.WriteLine();
+			}
 
-        private decimal CalculerSolde()
-        {
-            return _soldeCourant + CalculerIntérêts() ;
-        }
-        #endregion
+			distrib.Paiement = 1.0m;
+			distrib.QuantitéSucre = 3;
+			string service = distrib.ServirBoisson();
+			Console.WriteLine(service);
 
-        #region Méthodes publiques
-        public void Cloturer()// pas cloturerCompte parce que je sais que je suis sur la classe Compte
-        {
-            _dateCloture = DateTime.Today;
-            CalculerSolde();
-        }
-
-        public void Créditer(decimal montant)
-        {
-            _soldeCourant += montant;
-        }
-
-        public void Débiter(decimal montant)
-        {
-            _soldeCourant -= montant;
-            if (_soldeCourant < _decouvertAutorisé)
-            {
-                _soldeCourant -= 5;
-            }
-            if (-_soldeCourant < 0)
-                _aDécouvert = true;//On modifie la variable car on est à l'intérieur de la classe
-        }
-        #endregion
-    }
+			string rendu = distrib.RendreMonnaie();
+			Console.WriteLine(rendu);
+		}
+	}
 }
