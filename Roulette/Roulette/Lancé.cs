@@ -6,7 +6,26 @@ using System.Threading.Tasks;
 
 namespace Roulette
 {
-    class Lancé
+    public class Lancé
     {
+        #region Propriétés
+        public int? Numéro { get; }
+        public Combinaisons Combinaison { get; }
+        #endregion
+
+        #region Constructeur
+        public Lancé(int? num, Combinaisons combi)
+        {
+            Numéro = num;
+            Combinaison = combi;
+        }
+        #endregion
+
+        #region Méthodes publiques
+        public bool CorrespondA(Lancé lance)
+        {
+            return true;
+        }
+        #endregion
     }
 }
