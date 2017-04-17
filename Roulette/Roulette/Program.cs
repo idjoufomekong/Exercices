@@ -10,6 +10,9 @@ namespace Roulette
     {
         static void Main(string[] args)
         {
+            Jeu jeu = new Jeu();
+            jeu.Jouer();
+            Console.ReadKey();
         }
     }
 }
