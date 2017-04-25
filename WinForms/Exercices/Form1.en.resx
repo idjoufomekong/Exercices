@@ -117,7 +117,71 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TitreAppli" xml:space="preserve">
-    <value>Explorateur de fichiers</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 13</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Repertory to analise</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>To analise</value>
+  </data>
+  <data name="lblNLong.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 26</value>
+  </data>
+  <data name="lblNLong.Text" xml:space="preserve">
+    <value>A name of file very long which can't be on a single line</value>
+  </data>
+  <data name="chkListFichProj.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
+  </data>
+  <data name="chkListFichProj.Text" xml:space="preserve">
+    <value>List of projects files</value>
+  </data>
+  <data name="chkFichLong.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
+  </data>
+  <data name="chkFichLong.Text" xml:space="preserve">
+    <value>Name of the most long file</value>
+  </data>
+  <data name="chkNbFichCs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 17</value>
+  </data>
+  <data name="chkNbFichCs.Text" xml:space="preserve">
+    <value>Number of cs files</value>
+  </data>
+  <data name="chkNbFich.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 17</value>
+  </data>
+  <data name="chkNbFich.Text" xml:space="preserve">
+    <value>Number of all files</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Projects files</value>
+  </data>
+  <data name="lblFich.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 17</value>
+  </data>
+  <data name="lblFich.Text" xml:space="preserve">
+    <value>files</value>
+  </data>
+  <data name="lblFichCs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 17</value>
+  </data>
+  <data name="lblFichCs.Text" xml:space="preserve">
+    <value>files cs</value>
+  </data>
+  <data name="lblNomLg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="lblNomLg.Text" xml:space="preserve">
+    <value>Most long name</value>
   </data>
 </root>

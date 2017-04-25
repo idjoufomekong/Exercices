@@ -26,9 +26,6 @@ namespace Explorateur_de_fichiers
         public Analyseur()
         {
             ListeFichierprojet = new List<string>();
-            PlusLongFichier = "";
-            NbFichiers = 0;
-            NbFichiersCs = 0;
         }
         #endregion
 
@@ -36,7 +33,7 @@ namespace Explorateur_de_fichiers
         public void CompterFichiers(FileInfo fichier)
         {
             NbFichiers++;
-            if (fichier.Extension == ".cs")
+            if (fichier.Extension.ToLower() == ".cs")
                 NbFichiersCs++;   
         }
 
@@ -49,15 +46,24 @@ namespace Explorateur_de_fichiers
 
         public void TrouverFichierProjetCSharp(FileInfo fichier)
         {
-            if (fichier.Extension == ".cs")
-                ListeFichierprojet.Add(fichier.Name);
+            if (fichier.Extension.ToLower() == ".csproj")
+                ListeFichierprojet.Add(Path.GetFileNameWithoutExtension(fichier.Name));
         }
 
-        //public void AfficherAnalyse(Analyseur ana)
-        //{
-        //    string.Format("\n {0} fichiers, dont {1} fichiers .cs \n Nom de fichier le plus long : \n{ 2} ",
-        //        ana.);
-        //}
+        public void AnalyserFichier(string chemin)
+        {
+
+            PlusLongFichier = "";
+            NbFichiers = 0;
+            NbFichiersCs = 0;
+
+            DelegueExplorateur analize = null;
+            analize += CompterFichiers;
+            analize += TrouverFichierLong;
+            analize += TrouverFichierProjetCSharp;
+
+            Explorateur.Explorer(chemin, analize);
+        }
         #endregion
     }
 }

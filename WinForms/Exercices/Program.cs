@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Explorateur_de_fichiers;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,7 +19,7 @@ namespace Exercices
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Analyser());
         }
     }
 }

@@ -16,22 +16,24 @@ namespace Explorateur_de_fichiers
 
         #endregion
 
-        #region Constructeur
-        public Explorateur(string chemin)
-        {
-            Chemin = chemin;
-            ListeFichiers = new List<FileInfo>();
-        }
-        #endregion
+        //#region Constructeur
+        //public Explorateur()
+        //{
+        //    Chemin = chemin;
+        //    ListeFichiers = new List<FileInfo>();
+        //}
+        //#endregion
 
         #region Métodes publiques
         public static void Explorer(string chemin, DelegueExplorateur analyserFichier)
         {
-            DirectoryInfo repertoire = new DirectoryInfo(chemin);
-            
-             foreach(var a in repertoire.EnumerateFiles())
-            {
-                analyserFichier(a);
+            if ((new DirectoryInfo(chemin)).Exists)
+            { 
+                DirectoryInfo repertoire = new DirectoryInfo(chemin);
+                foreach (var a in repertoire.EnumerateFiles("*", SearchOption.AllDirectories))
+                {
+                    analyserFichier(a);
+                }
             }
 
         }
