@@ -14,8 +14,7 @@ namespace Roulette
     Rouge = 4,
     Noir = 8,
     Impair = 32,
-    Pair = 64,
-    Précis = 128
+    Pair = 64
     }
     class Mise
     {

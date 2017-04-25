@@ -24,21 +24,7 @@ namespace Roulette
         #region Méthodes publiques
         public bool CorrespondA(Lancé lance)
         {
-            if(lance.Combinaison != Combinaisons.Précis)
-            {
-                if (lance.Combinaison == Combinaison)
-                    return true;
-                else
-                    return false;
-            }
-            else
-            {
-                if (lance.Numéro == Numéro)
-                    return true;
-                else
-                    return false;
-            }
-            
+            return true;
         }
         #endregion
     }
