@@ -23,12 +23,20 @@ namespace Exercices
             chkNbFich.CheckStateChanged += ChkNbFich_CheckStateChanged;
             chkNbFichCs.CheckStateChanged += ChkNbFichCs_CheckStateChanged;
             chkFichLong.CheckStateChanged += ChkFichLong_CheckStateChanged;
-            chkListFichProj.CheckStateChanged += ChkListFichProj_CheckStateChanged;
+            //chkListFichProj.CheckStateChanged += ChkListFichProj_CheckStateChanged;
             btSelDos.Click += BtSelDos_Click;
             btAnalyser.Click += BtAnalyser_Click;
-            
+
+            //Branchement méthode avec expression lambda
+            chkListFichProj.CheckedChanged += (object sender, EventArgs e) =>
+            {
+                pnlFicProj.Visible = chkListFichProj.Checked;
+                lbFichProj.Visible = chkListFichProj.Checked;
+            };
+
             //this.load += 
             this.FormClosing += Analyser_FormClosing;
+            this.Text = Properties.Resources.TitreAppli;
         }
 
         private void BtAnalyser_Click(object sender, EventArgs e)
@@ -42,16 +50,39 @@ namespace Exercices
             foreach(var a in ana.ListeFichierprojet)
             {
 
-                lvFichProj.Items.Add(a);
+                lbFichProj.Items.Add(a); //utilise la méthode tostring de l'objet pour afficher
 
             }
         }
-
+      
         private void Analyser_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Sauvegarder le répertoire et l'état des cases à cocher?",
-        "Confirmer fermeture",MessageBoxButtons.YesNoCancel);
+            DialogResult result = MessageBox.Show(Properties.Resources.MessageConfirmationfermeture,
+        Properties.Resources.TitreConfirmationFermeture, MessageBoxButtons.YesNoCancel);
             //tester avec switch
+            //switch (result)
+            //{
+            //    case DialogResult.None:
+            //        break;
+            //    case DialogResult.OK:
+            //        break;
+            //    case DialogResult.Cancel:
+            //        break;
+            //    case DialogResult.Abort:
+            //        break;
+            //    case DialogResult.Retry:
+            //        break;
+            //    case DialogResult.Ignore:
+            //        break;
+            //    case DialogResult.Yes:
+            //        break;
+            //    case DialogResult.No:
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+
             if(result == DialogResult.Yes)
             {
                 Properties.Settings.Default.ckLFP = chkListFichProj.Checked;
@@ -94,7 +125,7 @@ namespace Exercices
         private void ChkListFichProj_CheckStateChanged(object sender, EventArgs e)
         {
             pnlFicProj.Visible = chkListFichProj.Checked;
-            lvFichProj.Visible = chkListFichProj.Checked;
+            lbFichProj.Visible = chkListFichProj.Checked;
             //Properties.Settings.Default.ckLFP = chkListFichProj.Checked;
             //Properties.Settings.Default.Save();
         }

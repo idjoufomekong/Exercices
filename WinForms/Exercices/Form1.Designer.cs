@@ -41,12 +41,12 @@
             this.chkNbFich = new System.Windows.Forms.CheckBox();
             this.pnlFicProj = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.lvFichProj = new System.Windows.Forms.ListView();
             this.lblNbFich = new System.Windows.Forms.Label();
             this.lblNbFichCs = new System.Windows.Forms.Label();
             this.lblFich = new System.Windows.Forms.Label();
             this.lblFichCs = new System.Windows.Forms.Label();
             this.lblNomLg = new System.Windows.Forms.Label();
+            this.lbFichProj = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.pnlFicProj.SuspendLayout();
             this.SuspendLayout();
@@ -58,8 +58,8 @@
             // 
             // tbDossier
             // 
-            this.tbDossier.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Exercices.Properties.Settings.Default, "TbChemin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             resources.ApplyResources(this.tbDossier, "tbDossier");
+            this.tbDossier.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Exercices.Properties.Settings.Default, "TbChemin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbDossier.Name = "tbDossier";
             this.tbDossier.Text = global::Exercices.Properties.Settings.Default.TbChemin;
             // 
@@ -82,11 +82,11 @@
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.chkListFichProj);
             this.groupBox1.Controls.Add(this.chkFichLong);
             this.groupBox1.Controls.Add(this.chkNbFichCs);
             this.groupBox1.Controls.Add(this.chkNbFich);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -128,9 +128,9 @@
             // 
             // pnlFicProj
             // 
+            resources.ApplyResources(this.pnlFicProj, "pnlFicProj");
             this.pnlFicProj.BackColor = System.Drawing.SystemColors.Control;
             this.pnlFicProj.Controls.Add(this.label2);
-            resources.ApplyResources(this.pnlFicProj, "pnlFicProj");
             this.pnlFicProj.Name = "pnlFicProj";
             // 
             // label2
@@ -138,16 +138,10 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // lvFichProj
-            // 
-            resources.ApplyResources(this.lvFichProj, "lvFichProj");
-            this.lvFichProj.Name = "lvFichProj";
-            this.lvFichProj.UseCompatibleStateImageBehavior = false;
-            // 
             // lblNbFich
             // 
             resources.ApplyResources(this.lblNbFich, "lblNbFich");
-            this.lblNbFich.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblNbFich.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lblNbFich.Name = "lblNbFich";
             // 
             // lblNbFichCs
@@ -174,17 +168,23 @@
             this.lblNomLg.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lblNomLg.Name = "lblNomLg";
             // 
+            // lbFichProj
+            // 
+            resources.ApplyResources(this.lbFichProj, "lbFichProj");
+            this.lbFichProj.FormattingEnabled = true;
+            this.lbFichProj.Name = "lbFichProj";
+            // 
             // Analyser
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.lbFichProj);
             this.Controls.Add(this.lblNomLg);
             this.Controls.Add(this.lblFichCs);
             this.Controls.Add(this.lblFich);
             this.Controls.Add(this.lblNbFichCs);
             this.Controls.Add(this.lblNbFich);
-            this.Controls.Add(this.lvFichProj);
             this.Controls.Add(this.pnlFicProj);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblNLong);
@@ -217,12 +217,12 @@
         private System.Windows.Forms.CheckBox chkFichLong;
         private System.Windows.Forms.Panel pnlFicProj;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView lvFichProj;
         private System.Windows.Forms.Label lblNbFich;
         private System.Windows.Forms.Label lblNbFichCs;
         private System.Windows.Forms.Label lblFich;
         private System.Windows.Forms.Label lblFichCs;
         private System.Windows.Forms.Label lblNomLg;
+        private System.Windows.Forms.ListBox lbFichProj;
     }
 }
 

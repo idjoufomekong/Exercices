@@ -61,11 +61,29 @@ namespace Exercices.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voulez-vous sauvegarder le répertoire et l&apos;état des cases à cocher?.
+        /// </summary>
+        internal static string MessageConfirmationfermeture {
+            get {
+                return ResourceManager.GetString("MessageConfirmationfermeture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Explorateur de fichiers.
         /// </summary>
         internal static string TitreAppli {
             get {
                 return ResourceManager.GetString("TitreAppli", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmer fermeture.
+        /// </summary>
+        internal static string TitreConfirmationFermeture {
+            get {
+                return ResourceManager.GetString("TitreConfirmationFermeture", resourceCulture);
             }
         }
     }

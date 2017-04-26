@@ -127,4 +127,10 @@
   <data name="TitreAppli" xml:space="preserve">
     <value>Files Explorer</value>
   </data>
+  <data name="MessageConfirmationfermeture" xml:space="preserve">
+    <value>Do you want to save the settings?</value>
+  </data>
+  <data name="TitreConfirmationFermeture" xml:space="preserve">
+    <value>Confirm closing</value>
+  </data>
 </root>
