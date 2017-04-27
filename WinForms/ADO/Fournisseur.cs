@@ -48,4 +48,19 @@ namespace ADO
         public string Nom { get; set; }
         //public string Prénom { get; set; }
     }
+
+    public class Produit
+    {
+        [DisplayName("Identifiant produit")]
+        public int IdProduit { get; set; }
+        public string Nom { get; set; }
+        public int Categorie { get; set; }
+        [DisplayName("Quantité unitaire")]
+        public string QuantityPerUnit { get; set; }
+        [DisplayName("Prix unitaire")]
+        public decimal UnitPrice { get; set; }
+        [DisplayName("Quantité en stock")]
+        public int UnitsInStock { get; set; }
+        public int Fournisseur { get; set; }
+    }
 }

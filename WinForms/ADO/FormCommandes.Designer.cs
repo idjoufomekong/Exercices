@@ -39,7 +39,7 @@
             // lblCodeClient
             // 
             this.lblCodeClient.AutoSize = true;
-            this.lblCodeClient.Location = new System.Drawing.Point(45, 37);
+            this.lblCodeClient.Location = new System.Drawing.Point(192, 38);
             this.lblCodeClient.Name = "lblCodeClient";
             this.lblCodeClient.Size = new System.Drawing.Size(75, 13);
             this.lblCodeClient.TabIndex = 0;
@@ -47,14 +47,14 @@
             // 
             // tbCodeClient
             // 
-            this.tbCodeClient.Location = new System.Drawing.Point(138, 30);
+            this.tbCodeClient.Location = new System.Drawing.Point(313, 30);
             this.tbCodeClient.Name = "tbCodeClient";
             this.tbCodeClient.Size = new System.Drawing.Size(86, 20);
             this.tbCodeClient.TabIndex = 1;
             // 
             // btVoirCom
             // 
-            this.btVoirCom.Location = new System.Drawing.Point(242, 27);
+            this.btVoirCom.Location = new System.Drawing.Point(432, 28);
             this.btVoirCom.Name = "btVoirCom";
             this.btVoirCom.Size = new System.Drawing.Size(132, 23);
             this.btVoirCom.TabIndex = 2;
@@ -64,17 +64,17 @@
             // dgvListCom
             // 
             this.dgvListCom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListCom.Location = new System.Drawing.Point(48, 74);
+            this.dgvListCom.Location = new System.Drawing.Point(119, 74);
             this.dgvListCom.Name = "dgvListCom";
-            this.dgvListCom.Size = new System.Drawing.Size(516, 279);
+            this.dgvListCom.Size = new System.Drawing.Size(445, 279);
             this.dgvListCom.TabIndex = 3;
             // 
             // lbClient
             // 
             this.lbClient.FormattingEnabled = true;
-            this.lbClient.Location = new System.Drawing.Point(417, 20);
+            this.lbClient.Location = new System.Drawing.Point(12, 30);
             this.lbClient.Name = "lbClient";
-            this.lbClient.Size = new System.Drawing.Size(120, 30);
+            this.lbClient.Size = new System.Drawing.Size(101, 316);
             this.lbClient.TabIndex = 4;
             // 
             // FormCommandes

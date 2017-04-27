@@ -32,6 +32,7 @@
             this.menu1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWindows = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu3 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,6 +41,7 @@
             this.menuGeneral.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu1,
             this.menu2,
+            this.menu3,
             this.menuWindows});
             this.menuGeneral.Location = new System.Drawing.Point(0, 0);
             this.menuGeneral.Name = "menuGeneral";
@@ -65,6 +67,12 @@
             this.menuWindows.Size = new System.Drawing.Size(63, 20);
             this.menuWindows.Text = "Fenêtres";
             // 
+            // menu3
+            // 
+            this.menu3.Name = "menu3";
+            this.menu3.Size = new System.Drawing.Size(63, 20);
+            this.menu3.Text = "Produits";
+            // 
             // MDIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -88,6 +96,7 @@
 		private System.Windows.Forms.ToolStripMenuItem menu1;
 		private System.Windows.Forms.ToolStripMenuItem menuWindows;
 		private System.Windows.Forms.ToolStripMenuItem menu2;
-	}
+        private System.Windows.Forms.ToolStripMenuItem menu3;
+    }
 }
 

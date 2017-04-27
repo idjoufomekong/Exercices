@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormProduits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProduits.designer.cs">
+      <DependentUpon>FormProduits.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL.cs" />
     <Compile Include="FormCommandes.cs">
       <SubType>Form</SubType>
@@ -73,6 +79,12 @@
     <Compile Include="FormFournisseurs .Designer.cs">
       <DependentUpon>FormFournisseurs .cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSaisieProduit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSaisieProduit.Designer.cs">
+      <DependentUpon>FormSaisieProduit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fournisseur.cs" />
     <Compile Include="MDIForm.cs">
       <SubType>Form</SubType>
@@ -82,11 +94,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormProduits.resx">
+      <DependentUpon>FormProduits.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCommandes.resx">
       <DependentUpon>FormCommandes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFournisseurs .resx">
       <DependentUpon>FormFournisseurs .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSaisieProduit.resx">
+      <DependentUpon>FormSaisieProduit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MDIForm.resx">
       <DependentUpon>MDIForm.cs</DependentUpon>
