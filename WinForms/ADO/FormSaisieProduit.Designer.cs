@@ -171,7 +171,7 @@
             // mtbUnitPrice
             // 
             this.mtbUnitPrice.Location = new System.Drawing.Point(147, 111);
-            this.mtbUnitPrice.Mask = "0000.00";
+            this.mtbUnitPrice.Mask = "9999.99";
             this.mtbUnitPrice.Name = "mtbUnitPrice";
             this.mtbUnitPrice.Size = new System.Drawing.Size(123, 20);
             this.mtbUnitPrice.TabIndex = 4;

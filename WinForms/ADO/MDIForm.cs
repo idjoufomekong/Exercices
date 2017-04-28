@@ -16,7 +16,9 @@ namespace ADO
 
             menu1.Click += (object sender, EventArgs e) => ShowChild("ADO.FormFournisseurs");
             menu2.Click += (object sender, EventArgs e) => ShowChild("ADO.FormCommandes");
+            //Je m'abonne à mon évènement de click pas avec un gestionnaire mais avec une expression lambda
             menu3.Click += (object sender, EventArgs e) => ShowChild("ADO.FormProduits");
+            menu4.Click += (object sender, EventArgs e) => ShowChild("ADO.FormRegionPerson");
 
             // TODO : branchez ici l'ouverture des fenêtres filles sur le clic des menus
             //menu1.Click += (object sender, EventArgs e) => ShowChild("ADO.Form1");

@@ -12,7 +12,7 @@ namespace ADO
 {
     public partial class FormSaisieProduit : Form
     {
-        public Produit ProduitSaisi { get; set; }
+        public Produit ProduitSaisi { get; private set; }
         public FormSaisieProduit()
         {
             InitializeComponent();
@@ -20,18 +20,31 @@ namespace ADO
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            if(DialogResult == DialogResult.OK)
+            if (DialogResult == DialogResult.OK)
             {
                 ProduitSaisi = new Produit();
                 ProduitSaisi.Nom = tbNom.Text;
                 ProduitSaisi.Categorie = int.Parse(mtbCategorie.Text);
-                ProduitSaisi.QuantityPerUnit = tbUnitQuantity.Text;
-                ProduitSaisi.UnitPrice = decimal.Parse(mtbUnitPrice.Text);
-                ProduitSaisi.UnitsInStock = int.Parse(mtbUnitInStock.Text);
+
+               // if (!string.IsNullOrEmpty(tbUnitQuantity.Text))
+                    ProduitSaisi.QuantityPerUnit = tbUnitQuantity.Text;
+
+                decimal prix;
+                if (decimal.TryParse(mtbUnitPrice.Text, out prix))
+                    ProduitSaisi.UnitPrice = prix;
+                else
+                    ProduitSaisi.UnitPrice = null;
+
+                int unit;
+                if (int.TryParse(mtbUnitInStock.Text,out unit))
+                    ProduitSaisi.UnitsInStock = unit;
+                else
+                    ProduitSaisi.UnitsInStock = null;
+
                 ProduitSaisi.Fournisseur = int.Parse(mtbFournisseur.Text);
             }
-                        
-                  
+
+
             base.OnClosing(e);
         }
     }

@@ -58,9 +58,37 @@ namespace ADO
         [DisplayName("Quantité unitaire")]
         public string QuantityPerUnit { get; set; }
         [DisplayName("Prix unitaire")]
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; } //? rend le champ nullable
         [DisplayName("Quantité en stock")]
-        public int UnitsInStock { get; set; }
+        public int? UnitsInStock { get; set; }
         public int Fournisseur { get; set; }
+    }
+
+    public class Categorie
+    {
+        public int IdCategorie { get; set; }
+        public string NomCategorie { get; set; }
+    }
+
+    public class Personne
+    {
+        public int IdPersonne { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public List<Region> listRegion { get; set; }
+        public List<Territoire> listTerritoire { get; set; }
+    }
+
+    public class Region
+    {
+        public int IdRegion { get; set; }
+        public string DescRegion { get; set; }
+    }
+
+    public class Territoire
+    {
+        public int IdTerritoire { get; set; }
+        public string DescTerritoire { get; set; }
+        public bool AppartientA { get; set; }
     }
 }
