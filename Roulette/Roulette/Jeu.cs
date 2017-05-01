@@ -9,12 +9,20 @@ namespace Roulette
     public class Jeu
     {
         #region Champs privés
-        public static int _nbJetons;
-        private static Roulette _roulette;
-        public static int _nbMise = 1;
+        private int _nbJetons;
+        private Roulette _roulette;
+        private  static int _nbMise = 1;
         private static int _nbJetonInit, _nbJetonFinal;
-        public static int _nbGagnant = 0;
-        public static int _nbPerdant = 0;
+        private static int _nbGagnant = 0;
+        private static int _nbPerdant = 0;
+        #endregion
+
+        #region Propriétés 
+        public Roulette Roulette { get {return _roulette; } }
+        public int NbJetons { get { return _nbJetons; }
+                              set { _nbJetons = value; } }
+        public int MyProperty { get; set; }
+
         #endregion
 
         #region Constructeur
@@ -92,8 +100,13 @@ namespace Roulette
 
             do
             {
-                Console.WriteLine("Combien de jetons misez-vous (max : " + _nbJetons + ") ?");
-                jeton = int.Parse(Console.ReadLine());
+                Console.WriteLine("Combien de jetons misez-vous (max : " + NbJetons + ") ?");
+                do
+                {
+                    jeton = int.Parse(Console.ReadLine());
+
+                }
+                while (jeton > NbJetons);
             }
             while (jeton == 0);
             //Retour du choix
@@ -115,16 +128,28 @@ namespace Roulette
             if (lance.CorrespondA(mise.Pari))
             {
                 mise.Gagnante = true;
-                
+                NbJetons += mise.Gain;
+                _nbGagnant++;
             }
-             Console.WriteLine(lance.GetResultatTexte());
-             Console.WriteLine(mise.GetResultatTexte());
+            else
+            {
+                NbJetons -= mise.Gain;
+                _nbPerdant++;
+            }
+               
+            Console.WriteLine(lance.GetResultatTexte());
+            Console.Write(mise.GetResultatTexte());
+            if(NbJetons > 0)
+                Console.Write(string.Format("Vous possédez désormais {0} jetons.\n", NbJetons));
+            else
+                Console.Write("Il ne vous reste plus aucun jeton.\n");
+            
         }
 
         public bool SaisirContinuation()
         {
             string cont;
-            if (_nbJetons == 0)
+            if (_nbJetons <= 0)
                 return false;
             do
             {
@@ -142,12 +167,13 @@ namespace Roulette
         public void AfficherStats()
         {
             int gain = _nbJetonFinal - _nbJetonInit;
+            if (_nbJetonFinal < 0) _nbJetonFinal = 0;
             if (gain < 0) gain = 0;
             Console.WriteLine(string.Format("{0} mises réalisées, dont {1} gagnante(s) et {2} perdante(s)." +
                 "\nNombre de jetons initial : {3}" +
                 "\nNombre de jetons final : {4} (+{5})" +
                 "\nMerci d’avoir joué.",
-                _nbMise, _nbGagnant, _nbPerdant, _nbJetonInit, _nbJetonFinal,gain));
+                _nbMise-1, _nbGagnant, _nbPerdant, _nbJetonInit, _nbJetonFinal,gain));
         }
         #endregion
 

@@ -29,12 +29,11 @@ namespace Roulette
         public int NbJetons {
             get
             {
-                return Jeu._nbJetons;
+                return _jetons;
             }
             set
             {
-                if (Gagnante) _jetons += Gain;
-                else _jetons -= Gain;
+                _jetons = value;
             }
         }
         public bool Gagnante { get; set; }
@@ -71,21 +70,12 @@ namespace Roulette
         {
             if (Gagnante)
             {
-                Jeu._nbJetons += Gain;
-                Jeu._nbGagnant++;
-                if (Jeu._nbJetons < 0) Jeu._nbJetons = 0;
-                return string.Format("Vous gagnez {0} jetons. Vous possédez désormais {1} jetons.", Gain, Jeu._nbJetons);
+             return string.Format("Vous gagnez {0} jetons. ", Gain);
             }
               
             else
             {
-                Jeu._nbJetons -= Gain;
-                Jeu._nbPerdant++;
-                if (Jeu._nbJetons < 0) Jeu._nbJetons = 0;
-                if (NbJetons == 0)
-                    return string.Format("Vous perdez {0} jetons. Il ne vous reste plus aucun jeton.", Gain);
-                else
-                    return string.Format("Vous perdez {0} jetons. Vous possédez désormais {1} jetons.", Gain, Jeu._nbJetons);
+                return string.Format("Vous perdez {0} jetons. ", Gain);
             }
                 
         }
