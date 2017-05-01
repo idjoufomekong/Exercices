@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entrainement", "Entrainement\Entrainement.csproj", "{52880841-6E03-4D2E-9216-04BE5B2206E6}"
 EndProject
@@ -29,7 +29,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statuts", "Statuts\Statuts.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyseurLINQ", "AnalyseurLINQ\AnalyseurLINQ.csproj", "{8925E0E0-EFAC-4D4C-B364-67B26DFC4CF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO", "..\..\..\..\Users\djou\Downloads\Exercices-master\Console\POO\POO.csproj", "{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO", "..\..\Users\djou\Downloads\Exercices-master\Console\POO\POO.csproj", "{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Explorateur de fichiers", "Explorateur de fichiers\Explorateur de fichiers.csproj", "{71AE196C-B5E6-430B-952C-9B35E58C940E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2977BD2E-1C80-4FF8-98B5-E96187BCBFB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71AE196C-B5E6-430B-952C-9B35E58C940E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71AE196C-B5E6-430B-952C-9B35E58C940E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71AE196C-B5E6-430B-952C-9B35E58C940E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71AE196C-B5E6-430B-952C-9B35E58C940E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

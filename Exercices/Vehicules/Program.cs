@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,45 +46,46 @@ namespace Vehicules
             Véhicule v3 = new Voiture("Enzo", 380000);
             Véhicule v4 = new Moto("Yamaha XJR1300", 11000);
 
-            Dictionary<string, Véhicule> Véhicules = new Dictionary<string, Véhicule>();
-            Véhicules.Add(v1.Nom, v1);
-            Véhicules.Add(v2.Nom, v2);
-            Véhicules.Add(v3.Nom, v3);
-            Véhicules.Add(v4.Nom, v4);
+            //Gestion délégués
+            /* Dictionary<string, Véhicule> Véhicules = new Dictionary<string, Véhicule>();
+             Véhicules.Add(v1.Nom, v1);
+             Véhicules.Add(v2.Nom, v2);
+             Véhicules.Add(v3.Nom, v3);
+             Véhicules.Add(v4.Nom, v4);
 
-            Console.OutputEncoding = Encoding.Unicode;// pour mettre le symbole €
-            foreach(var a in Véhicules)
-            {
-                Console.WriteLine("Nom: {0} prix: {1}€", a.Key, a.Value.Prix);
-            }
+             Console.OutputEncoding = Encoding.Unicode;// pour mettre le symbole €
+             foreach(var a in Véhicules)
+             {
+                 Console.WriteLine("Nom: {0} prix: {1}€", a.Key, a.Value.Prix);
+             }
 
-            SortedList<string, Véhicule> ListVéhicule = new SortedList<string, Véhicule>();
-            foreach(var a in Véhicules)
-            {
-                ListVéhicule.Add(a.Key, a.Value);
-            }
-            //Véhicules.Clear();
-            Console.WriteLine("liste");
-            foreach(var a in ListVéhicule)
-            {
-                Console.WriteLine("Nom: {0} prix: {1}€", a.Key, a.Value.Prix);
-            }
+             SortedList<string, Véhicule> ListVéhicule = new SortedList<string, Véhicule>();
+             foreach(var a in Véhicules)
+             {
+                 ListVéhicule.Add(a.Key, a.Value);
+             }
+             //Véhicules.Clear();
+             Console.WriteLine("liste");
+             foreach(var a in ListVéhicule)
+             {
+                 Console.WriteLine("Nom: {0} prix: {1}€", a.Key, a.Value.Prix);
+             }
 
-            SortedList<Véhicule, string> ListVéhicule1 = new SortedList<Véhicule, string>();
-            foreach (var a in Véhicules)
-            {
-                ListVéhicule1.Add(a.Value, a.Key);
-            }
-            //Véhicules.Clear();
+             SortedList<Véhicule, string> ListVéhicule1 = new SortedList<Véhicule, string>();
+             foreach (var a in Véhicules)
+             {
+                 ListVéhicule1.Add(a.Value, a.Key);
+             }
+             //Véhicules.Clear();
 
-            Console.WriteLine("liste1");
-            foreach (var a in ListVéhicule1)
-            {
-                Console.WriteLine("Nom: {0} prix: {1}€", a.Key.Nom, a.Key.Prix);
-            }
+             Console.WriteLine("liste1");
+             foreach (var a in ListVéhicule1)
+             {
+                 Console.WriteLine("Nom: {0} prix: {1}€", a.Key.Nom, a.Key.Prix);
+             }
 
-            Console.WriteLine("Résultat recherche");
-            string[] tabChaine = {"Clio","Mégane", "Golf", "Enzo", "Polo" };
+             Console.WriteLine("Résultat recherche");
+             string[] tabChaine = {"Clio","Mégane", "Golf", "Enzo", "Polo" };(1)*/
 
             /*for(int i=0; i<tabChaine.Length; i++)
             {
@@ -94,14 +96,53 @@ namespace Vehicules
                         Console.WriteLine("Nom: {0} prix: {1}€", a.Key, a.Value.Prix);
                 }
             }*/
-            foreach(var s in tabChaine)
+            /*foreach(var s in tabChaine)
             {
-                Vehicule v;
+                Véhicule v;
                 if(Véhicules.TryGetValue(s,out v))
                     Console.WriteLine("Nom: {0} Prix: {1}",v.Nom, v.Prix);
-            }
+            }(1)*/
+
+            DelegueEntretien entretien = null;
+            entretien += ChangerPneus;
+            entretien += Vidanger;
+            entretien += RetoucherPeinture;
+
+            v1.Entretenir(new DateTime(2008,10,05), entretien);
+            AfficherCarnetEntretien(v1);
 
             Console.ReadKey();
+        }
+
+        public static void ChangerPneus(Véhicule v)
+        {
+            DateTime d = v.CarnetEntretien.Keys.Last();
+            v.CarnetEntretien[d] += "\n- Pneus changés";
+
+
+        }
+
+        public static void Vidanger(Véhicule v)
+        {
+            DateTime d = v.CarnetEntretien.Keys.Last();
+            v.CarnetEntretien[d] += "\n- Vidange effectuée";
+        }
+
+        public static void RetoucherPeinture(Véhicule v)
+        {
+            DateTime d = v.CarnetEntretien.Keys.Last();
+            v.CarnetEntretien[d] += "\n- Peinture retouchée"; 
+        }
+
+        public static void AfficherCarnetEntretien(Véhicule v)
+        {
+            foreach( var a in v.CarnetEntretien)
+            {
+                /*Console.Write("Entretien du véhicule " + v.Nom + " du " + a.Key.ToString("d", DateTimeFormatInfo.InvariantInfo) + ":");
+                Console.Write(a.Value);*/
+
+                Console.WriteLine("Entretien du véhicule {0} du {1:d} {2}",v.Nom,a.Key, a.Value);
+            }
         }
     }
 }

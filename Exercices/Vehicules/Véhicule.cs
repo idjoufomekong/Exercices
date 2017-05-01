@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vehicules
 {
+    public delegate void DelegueEntretien(Véhicule v);
     public abstract class Véhicule: IComparable
     {
         #region Propriétés             
@@ -14,6 +15,7 @@ namespace Vehicules
         public Energies Energie { get; set; }
         public abstract int PRK { get;  }
         public double Prix { get; private set; }
+        public Dictionary<DateTime,string> CarnetEntretien { get;} //Empêche juste qu'on refasse un new dessus
 
         public virtual string Description
         {
@@ -30,12 +32,14 @@ namespace Vehicules
             Nom = nom;
             this.NbRoues = nbRoues;
             Energie = energie;
+            CarnetEntretien = new Dictionary<DateTime, string>();
         }
 
         public Véhicule(string nom, double prix)
         {
             Nom = nom;
             Prix = prix;
+            CarnetEntretien = new Dictionary<DateTime, string>();
         }
         #endregion
 
@@ -78,9 +82,18 @@ namespace Vehicules
             return "Argument n'est pas un Véhicule";
             }
         }
+
+        public void Entretenir(DateTime date, DelegueEntretien entretien)
+        {
+            CarnetEntretien.Add(date, string.Empty);
+            entretien(this);
+        }
         #endregion
+
+       
     }
 
+    
     public class Voiture : Véhicule
     {
         private const int NB_ROUES_VOITURE = 4;
