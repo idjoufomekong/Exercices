@@ -91,4 +91,20 @@ namespace ADO
         public string DescTerritoire { get; set; }
         public bool AppartientA { get; set; }
     }
+
+    public class Commande
+    {
+        public int IdCommande { get; set; }
+        public string IdClient { get; set; }
+        public string DateCommande { get; set; }
+        public List<DetailsCommande> ListeDetails { get; set; }
+    }
+
+    public class DetailsCommande
+    {
+        public int IdProduit { get; set; }
+        public float Discount { get; set; }
+        public int Quantité { get; set; }
+        public decimal UnitPrice { get; set; }
+    }
 }

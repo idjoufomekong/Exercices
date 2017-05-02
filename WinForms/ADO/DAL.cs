@@ -579,5 +579,61 @@ namespace ADO
 
             listPersonnes.Add(pers);
         }
+
+        //Récupération de la liste des commandes avec les détails
+        public static List<Commande> GetListeCommandes()
+        {
+            var listCommandesEtDetails = new List<Commande>();
+            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            string queryString = @"select O.OrderID, O.CustomerID,CONVERT(nvarchar,O.OrderDate,101) DateCom, 
+                                    OD.ProductID, OD.Discount,OD.Quantity,OD.UnitPrice 
+                                    from Orders O
+                                    inner join Order_Details OD on O.OrderID = OD.OrderID
+                                    order by 1";
+
+            using (var connect = new SqlConnection(connectString))
+            {
+                var command = new SqlCommand(queryString, connect);
+                connect.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        GetCommandesFromDataReader(listCommandesEtDetails, reader);
+                    }
+                }
+            }
+
+            return listCommandesEtDetails;
+        }
+        //La méthode GetInfosCommandesFromDataReader crée les instances de la collection envoyée en paramètre
+        private static void GetCommandesFromDataReader(List<Commande> lstCom, SqlDataReader reader)
+        {
+            int idCommande = (int)reader["OrderID"];
+            Commande com = null;
+            if ((lstCom.Count == 0) || (lstCom[lstCom.Count - 1].IdCommande != idCommande))
+            {
+                com = new Commande();
+                //Attention aux champs nullable
+                com.IdCommande = (int)reader["OrderID"];
+                com.IdClient = (string)reader["CustomerID"];
+                if (reader["DateCom"] != DBNull.Value)
+                    com.DateCommande = (string)reader["DateCom"];
+                com.ListeDetails = new List<DetailsCommande>();
+                lstCom.Add(com);
+            }
+            else
+            {
+                com = lstCom[lstCom.Count - 1];
+
+            }
+                DetailsCommande detCom = new DetailsCommande();
+                detCom.IdProduit = (int)reader["ProductID"];
+                detCom.Discount = (float)reader["Discount"];
+                detCom.Quantité = (Int16)reader["Quantity"];
+                detCom.UnitPrice = (decimal)reader["UnitPrice"];
+                com.ListeDetails.Add(detCom);
+     }
     }
 }

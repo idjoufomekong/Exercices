@@ -31,9 +31,11 @@
             this.menuGeneral = new System.Windows.Forms.MenuStrip();
             this.menu1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu2Commandes = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu2DetCom = new System.Windows.Forms.ToolStripMenuItem();
             this.menu3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.menu4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,9 +61,24 @@
             // 
             // menu2
             // 
+            this.menu2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menu2Commandes,
+            this.menu2DetCom});
             this.menu2.Name = "menu2";
             this.menu2.Size = new System.Drawing.Size(87, 20);
             this.menu2.Text = "Commandes";
+            // 
+            // menu2Commandes
+            // 
+            this.menu2Commandes.Name = "menu2Commandes";
+            this.menu2Commandes.Size = new System.Drawing.Size(180, 22);
+            this.menu2Commandes.Text = "Commandes";
+            // 
+            // menu2DetCom
+            // 
+            this.menu2DetCom.Name = "menu2DetCom";
+            this.menu2DetCom.Size = new System.Drawing.Size(180, 22);
+            this.menu2DetCom.Text = "Details Commandes";
             // 
             // menu3
             // 
@@ -69,17 +86,17 @@
             this.menu3.Size = new System.Drawing.Size(63, 20);
             this.menu3.Text = "Produits";
             // 
-            // menuWindows
-            // 
-            this.menuWindows.Name = "menuWindows";
-            this.menuWindows.Size = new System.Drawing.Size(63, 20);
-            this.menuWindows.Text = "Fenêtres";
-            // 
             // menu4
             // 
             this.menu4.Name = "menu4";
             this.menu4.Size = new System.Drawing.Size(61, 20);
             this.menu4.Text = "Régions";
+            // 
+            // menuWindows
+            // 
+            this.menuWindows.Name = "menuWindows";
+            this.menuWindows.Size = new System.Drawing.Size(63, 20);
+            this.menuWindows.Text = "Fenêtres";
             // 
             // MDIForm
             // 
@@ -106,6 +123,8 @@
 		private System.Windows.Forms.ToolStripMenuItem menu2;
         private System.Windows.Forms.ToolStripMenuItem menu3;
         private System.Windows.Forms.ToolStripMenuItem menu4;
+        private System.Windows.Forms.ToolStripMenuItem menu2Commandes;
+        private System.Windows.Forms.ToolStripMenuItem menu2DetCom;
     }
 }
 

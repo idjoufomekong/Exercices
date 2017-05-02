@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDetailsCommande.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetailsCommande.Designer.cs">
+      <DependentUpon>FormDetailsCommande.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormProduits.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormDetailsCommande.resx">
+      <DependentUpon>FormDetailsCommande.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormProduits.resx">
       <DependentUpon>FormProduits.cs</DependentUpon>
     </EmbeddedResource>
