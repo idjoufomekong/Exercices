@@ -29,7 +29,11 @@ namespace ADO
         protected override void OnLoad(EventArgs e)
         {
             ListCommEtDetails = DAL.GetListeCommandes();
+            //Récupération à partir du fichier XML
+            //ListCommEtDetails = DAL.ImporterXml();
             dgvCommandes.DataSource = ListCommEtDetails;
+            DAL.ExporterXml(ListCommEtDetails);
+            DAL.ExporterCommandesXml_XmlWriter(ListCommEtDetails);
             //dgvCommandes.Columns["ListeDetails"].Visible = false; PARCE QUE la dgv n'affiche pas les listes
             base.OnLoad(e);
         }

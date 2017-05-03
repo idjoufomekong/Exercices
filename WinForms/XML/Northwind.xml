@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommandeClient>
+	<Clients>
+		<Client CustomerID="AFKI" CompanyName="AFFAN" ContactName="KILLIAN"/>
+			<Commandes>
+				<Commande OrderID="10295" OrderDate="10/01/2017"/>
+					<LignesCommande>
+						<LigneCommande ProductID="10" UnitPrice="1.3" Quantity="10" Discount="0.02"/> 
+						<LigneCommande ProductID="11" UnitPrice="1.4" Quantity="12" Discount="0.04"/>
+					</LignesCommande>
+			</Commandes>
+		</Clients>
+	<Clients>
+		<Client CustomerID="REVIN" CompanyName="REMY" ContactName="VINERION"/>
+			<Commandes>
+				<Commande OrderID="10300" OrderDate="10/04/2017"/>
+					<LignesCommande>
+						<LigneCommande ProductID="10" UnitPrice="1.3" Quantity="10" Discount="0.02"/> 
+						<LigneCommande ProductID="11" UnitPrice="1.4" Quantity="12" Discount="0.04"/>
+					</LignesCommande>
+				<Commande OrderID="10301" OrderDate="10/05/2017"/>
+					<LignesCommande>
+						<LigneCommande ProductID="10" UnitPrice="1.3" Quantity="10" Discount="0.02"/> 
+						<LigneCommande ProductID="11" UnitPrice="1.4" Quantity="12" Discount="0.04"/>
+					</LignesCommande>
+			</Commandes>
+		</Clients>
+</CommandeClient>

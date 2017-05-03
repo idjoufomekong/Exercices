@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace ADO
 {
@@ -585,11 +588,11 @@ namespace ADO
         {
             var listCommandesEtDetails = new List<Commande>();
             var connectString = Properties.Settings.Default.NorthwindConnectionString;
-            string queryString = @"select O.OrderID, O.CustomerID,CONVERT(nvarchar,O.OrderDate,101) DateCom, 
+            string queryString = @"select O.OrderID, O.CustomerID,CONVERT(nvarchar,O.OrderDate,103) DateCom, 
                                     OD.ProductID, OD.Discount,OD.Quantity,OD.UnitPrice 
                                     from Orders O
                                     inner join Order_Details OD on O.OrderID = OD.OrderID
-                                    order by 1";
+                                    order by 1,3";
 
             using (var connect = new SqlConnection(connectString))
             {
@@ -610,6 +613,8 @@ namespace ADO
         //La méthode GetInfosCommandesFromDataReader crée les instances de la collection envoyée en paramètre
         private static void GetCommandesFromDataReader(List<Commande> lstCom, SqlDataReader reader)
         {
+            IFormatProvider culture = new System.Globalization.CultureInfo("fr-FR", true);
+            //IFormatProvider culture = System.Threading.Thread.CurrentThread.CurrentCulture;
             int idCommande = (int)reader["OrderID"];
             Commande com = null;
             if ((lstCom.Count == 0) || (lstCom[lstCom.Count - 1].IdCommande != idCommande))
@@ -619,7 +624,13 @@ namespace ADO
                 com.IdCommande = (int)reader["OrderID"];
                 com.IdClient = (string)reader["CustomerID"];
                 if (reader["DateCom"] != DBNull.Value)
+                {
+                    //com.DateCom = new DateTime();
                     com.DateCommande = (string)reader["DateCom"];
+                    //com.DateCom = (DateTime)reader["DateCom"];
+                    com.DateCom = DateTime.Parse(com.DateCommande, culture);
+                    //TODO: set la culture
+                }
                 com.ListeDetails = new List<DetailsCommande>();
                 lstCom.Add(com);
             }
@@ -635,5 +646,71 @@ namespace ADO
                 detCom.UnitPrice = (decimal)reader["UnitPrice"];
                 com.ListeDetails.Add(detCom);
      }
+
+        public static void ExporterXml(List<Commande> listCom)
+        {
+            // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
+            // et le nom de l'élément xml racine
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Commande>),
+                                       new XmlRootAttribute("Commandes"));
+
+            using (var sw = new StreamWriter(@"..\..\Commande.xml"))
+            {
+                serializer.Serialize(sw, listCom);
+            }
+        }
+
+        public static List<Commande> ImporterXml()
+        {
+            List<Commande> listCom = null;
+
+            XmlSerializer deserializer = new XmlSerializer(typeof(List<Commande>),
+               new XmlRootAttribute("Commandes"));
+
+            using (var sr = new StreamReader(@"..\..\Commande.xml"))
+            {
+                // Deserialize renvoie un type object, qu'il faut transtyper 
+                listCom = (List<Commande>)deserializer.Deserialize(sr);
+            }
+
+            return listCom;
+        }
+
+        public static void ExporterCommandesXml_XmlWriter(List<Commande> listCom)
+        {
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = "\t";
+
+            using (XmlWriter writer = XmlWriter.Create(@"..\..\CommandesDatees_writer.xml", settings))
+            {
+                writer.WriteStartDocument();
+
+                writer.WriteStartElement("DatesCommandes");
+                DateTime date = DateTime.MinValue;
+                //foreach (var dateCol in listCom.OrderBy(x => x.DateCom).Select(x => x.DateCom).Distinct())
+                 foreach (var dateCol in listCom.OrderBy(x => x.DateCom).Select(x => new { x.DateCom.Year,x.DateCom.Month}).Distinct())
+                    {
+                    //if ((date == DateTime.MinValue) || (date.Month != dateCol.Month) || (date.Year != dateCol.Year))
+                    {
+                            writer.WriteStartElement("DateCommande");
+                            writer.WriteAttributeString("Année", dateCol.Year.ToString());
+                            writer.WriteAttributeString("Mois", dateCol.Month.ToString());
+                            foreach (var a in listCom.Where(x => (x.DateCom.Year == dateCol.Year) && (x.DateCom.Month == dateCol.Month)))
+                            {
+                                decimal montant = a.ListeDetails.Sum(x => (x.Quantité * x.UnitPrice) * (1 - (decimal)x.Discount));
+                                    writer.WriteStartElement("Commande");
+                                    writer.WriteAttributeString("Id", a.IdCommande.ToString());
+                                writer.WriteAttributeString("Montant", montant.ToString("0.00"));
+                                writer.WriteEndElement();
+                            }
+                            writer.WriteEndElement();
+                       // date = dateCol;
+                    }
+                }
+                writer.WriteEndElement();
+                writer.WriteEndDocument();//ferme les éléments encore ouverts
+            }
+        }
     }
 }

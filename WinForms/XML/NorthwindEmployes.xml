@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Employees>
+	<Employee Id="JODI" LastName="Josiane" Firstname="DIMITRI">
+		<Territoire TerritoryID="10220" territoryDescription="Territoire1"/>
+			<Region IdRegion="1" RegionDescription="West"/>
+		<TerritoryID>10222</TerritoryID>
+			<Region IdRegion="2" RegionDescription="East"/>
+	</Employee>
+	<Employee Id="SOGA" LastName="Sophie" Firstname="GALLO">
+		<TerritoryID>10230</TerritoryID>
+			<Region IdRegion="1" RegionDescription="West"/>
+		<TerritoryID>10252</TerritoryID>
+			<Region IdRegion="1" RegionDescription="West"/>
+	</Employee>
+</Employees>
+
