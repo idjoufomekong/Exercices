@@ -6,48 +6,80 @@
         xmlns:local="clr-namespace:FenetreParametrage"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="550">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="50"/>
+		</Grid.RowDefinitions>
 
-        <!--création des boutons du fond-->
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+		<!--création des boutons du fond-->
+		<StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                     Margin="5">
-            <Button Content="OK" Width="70" Height="30"/>
-            <Button  Content="Annuler" Margin="5" Width="70" Height="30"/>
-        </StackPanel>
-        <TabControl TabStripPlacement="Left" Grid.ColumnSpan="2">
-            <TabItem Header="Général">
-                <ScrollViewer>
-                    <StackPanel>
-                        <DockPanel Margin="20,20,0,10">
-                            <Image Source="pack://application:,,,/Images/Users.png" Height="30" VerticalAlignment="Top"/>
-                            <Label Content="Options générales d'utilisation de Word"/>
-                        </DockPanel>
-                        <Label Content="Options d'interface utilisateur" Margin="10" Background="Gray"/>
-                        <CheckBox Content="Afficher la mini barre d'outils lors de la sélection" Margin="20,0"/>
-                        <CheckBox Content="Activer l'aperçu instantané" Margin="20,3"/>
-                        <CheckBox Content="Mettre à jour le contenu des données pendant leur déplacement" Margin="20,0"/>
-                        <DockPanel Margin="20,5">
-                            <Label Content="Style d'info-bulle:"/>
-                            <ComboBox>
-                                <ComboBoxItem Content="Afficher les descriptions des fonctionnalités dans des info-bulles"/>
-                            </ComboBox>
-                        </DockPanel>
-                        <Label Content="Options d'interface utilisateur" Margin="10" Background="Gray"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Affichage">
-            </TabItem>
-            <TabItem Header="Vérification">
-            </TabItem>
-        </TabControl>
-    </Grid>
+			<Button Content="OK" Width="70" Height="30"/>
+			<Button  Content="Annuler" Margin="5" Width="70" Height="30"/>
+		</StackPanel>
+		<TabControl TabStripPlacement="Left" Grid.ColumnSpan="2">
+			<TabItem Header="Général">
+				<ScrollViewer>
+					<StackPanel>
+						<DockPanel Margin="20,20,0,10">
+							<Image Source="pack://application:,,,/Images/Users.png" Height="30" VerticalAlignment="Top"/>
+							<Label Content="Options générales d'utilisation de Word"/>
+						</DockPanel>
+						<Label Content="Options d'interface utilisateur" Margin="10" Background="Gray"/>
+						<CheckBox Content="Afficher la mini barre d'outils lors de la sélection" Margin="20,0"/>
+						<CheckBox Content="Activer l'aperçu instantané" Margin="20,3"/>
+						<CheckBox Content="Mettre à jour le contenu des données pendant leur déplacement" Margin="20,0"/>
+						<StackPanel Margin="20,5" Orientation="horizontal">
+							<Label Content="Style d'info-bulle:"/>
+							<ComboBox>
+								<ComboBoxItem Content="Afficher les descriptions des fonctionnalités dans des info-bulles"/>
+							</ComboBox>
+						</StackPanel>
+						<Label Content="Personnaliser votre suite de programmes Microsoft Office" Margin="10" Background="Gray"/>
+						<StackPanel Margin="20,5" Orientation="horizontal">
+							<Label Content="Nom d'utilisateur:"/>
+							<TextBlock Text="Cyril Seguenot"/>
+						</StackPanel>
+						<StackPanel Margin="20,5" Orientation="horizontal">
+							<Label Content="Initiales:"/>
+							<TextBlock Text="CS"/>
+						</StackPanel>
+						<CheckBox Content="Toujours utiliser ces valeurs, quelle que soit l'état de connexion à Office"
+								  Margin="20,3"/>
+						<StackPanel Margin="20,5" Orientation="horizontal">
+							<Label Content="Arrière-plan Office:"/>
+							<ComboBox>
+								<ComboBoxItem Content="Aucun arrière-plan"/>
+							</ComboBox>
+						</StackPanel>
+						<StackPanel Margin="20,5" Orientation="horizontal">
+							<Label Content="Thème Office:"/>
+							<ComboBox>
+								<ComboBoxItem Content="En couleur"/>
+							</ComboBox>
+						</StackPanel>
+						<Label Content="Options de démarrage" Margin="10" Background="Gray"/>
+						<DockPanel Margin="20,5">
+							<Label Content="Choisir les extensions que Word doit toujours ouvrir:"/>
+							<Button Content="Programmes que vous souhaitez utiliser"/>
+						</DockPanel>
+						<CheckBox Content="Me prévenir si Word n'est pas toujours utilisé pour l'affichage et la modification des documents"
+								  Margin="20,0"/>
+						<CheckBox Content="Ouvrir les pièces jointes et autres fichiers non modifiables en mode plein écran"
+								  Margin="20,3"/>
+						<CheckBox Content="Afficher l'écran de démarrage au lancement de l'application" Margin="20,0"/>
+					</StackPanel>
+				</ScrollViewer>
+			</TabItem>
+			<TabItem Header="Affichage">
+			</TabItem>
+			<TabItem Header="Vérification">
+			</TabItem>
+		</TabControl>
+	</Grid>
 </Window>
