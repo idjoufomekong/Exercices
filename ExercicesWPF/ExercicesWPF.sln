@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entrainement", "Entrainement\Entrainement.csproj", "{CD83B0CE-60FD-4D8D-8FC3-BDA6FB6FE17C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trombinoscope", "Trombinoscope\Trombinoscope.csproj", "{34F924E3-EBCA-4B3A-804D-A225AD9F4250}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenetreParametrage", "FenetreParametrage\FenetreParametrage.csproj", "{CA289052-4B30-49DF-89B5-9B837B12AE3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD83B0CE-60FD-4D8D-8FC3-BDA6FB6FE17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD83B0CE-60FD-4D8D-8FC3-BDA6FB6FE17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD83B0CE-60FD-4D8D-8FC3-BDA6FB6FE17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD83B0CE-60FD-4D8D-8FC3-BDA6FB6FE17C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34F924E3-EBCA-4B3A-804D-A225AD9F4250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34F924E3-EBCA-4B3A-804D-A225AD9F4250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34F924E3-EBCA-4B3A-804D-A225AD9F4250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34F924E3-EBCA-4B3A-804D-A225AD9F4250}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA289052-4B30-49DF-89B5-9B837B12AE3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA289052-4B30-49DF-89B5-9B837B12AE3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA289052-4B30-49DF-89B5-9B837B12AE3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA289052-4B30-49DF-89B5-9B837B12AE3F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

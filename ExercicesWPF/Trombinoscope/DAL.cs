@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+namespace Trombinoscope
+{
+    public class DAL
+    {
+        public static List<ImageSource> GetPictures()
+        {
+            var listPhotos = new List<ImageSource>();
+
+            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            string queryString = @"select Photo from Employees";
+
+            using (var connect = new SqlConnection(connectString))
+            {
+                var command = new SqlCommand(queryString, connect);
+                connect.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        if(reader["Photo"] != DBNull.Value)
+                        listPhotos.Add(ConvertBytesToImageSource((byte[])reader["Photo"]));
+                    }
+                }
+            }
+
+            return listPhotos;
+        }
+
+        private static ImageSource ConvertBytesToImageSource(Byte[] tab)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Les images stockées dans la base Northwind ont un en-tête de 78 octets 
+                // qu'il faut enlever pour pouvoir les charger correctement
+                ms.Write(tab, 78, tab.Length - 78);
+                ImageSource image = BitmapFrame.Create(ms, BitmapCreateOptions.None,
+                                      BitmapCacheOption.OnLoad);
+                return image;
+            }
+        }
+
+        //Récupération de la liste des employés
+        public static List<Employe> GetEmployees()
+        {
+            var listEmpl = new List<Employe>();
+
+            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            string queryString = @"select EmployeeID,LastName,FirstName from Employees";
+
+            using (var connect = new SqlConnection(connectString))
+            {
+                var command = new SqlCommand(queryString, connect);
+                connect.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        GetEmployesFromDataReader(listEmpl,reader);
+                    }
+                }
+            }
+
+            return listEmpl;
+        }
+
+        //Lecture du reader retourné par la requête SQL et construction de l'objet Employé
+        private static void GetEmployesFromDataReader(List<Employe> lstEmpl, SqlDataReader reader)
+        {
+            var emp = new Employe();
+            emp.Id = (int)reader["EmployeeID"];
+            emp.Nom = (string)reader["LastName"];
+            emp.Prenom = (string)reader["FirstName"];
+
+            lstEmpl.Add(emp);
+        }
+    }
+}
