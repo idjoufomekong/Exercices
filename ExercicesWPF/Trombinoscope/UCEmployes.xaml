@@ -6,16 +6,30 @@
              xmlns:local="clr-namespace:Trombinoscope"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+            <SolidColorBrush x:Key="CouleurEmploye" Color="AliceBlue"/>
+    </UserControl.Resources>
     <DockPanel>
-        <Image Height="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Source="pack://application:,,,/Images/Employes.jpg" 
+        <!--<Image Height="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Source="pack://application:,,,/Images/Employes.jpg" 
                Margin="10"/>
-        <ListBox x:Name="lbEmp" DockPanel.Dock="Left">
+        <ListBox x:Name="lbEmp" ItemsSource="{Binding}" DisplayMemberPath="NomComplet" DockPanel.Dock="Left"
+                IsSynchronizedWithCurrentItem="True">
 
         </ListBox>
-        <StackPanel Margin="5">
-            <TextBlock x:Name="tbId" Margin="3"></TextBlock>
-            <TextBlock x:Name="tbNom" Margin="3"></TextBlock>
-            <TextBlock x:Name="tbPrenom" Margin="3"></TextBlock>
-        </StackPanel>
+        <StackPanel Margin="5" Name="spEmpl" Background="{Binding Source={StaticResource CouleurEmploye}}">
+            <TextBlock x:Name="tbId" Margin="3" Text="{Binding Path=Id}"></TextBlock>
+            <TextBlock x:Name="tbNom" Margin="3" Text="{Binding Nom}"></TextBlock>
+            <TextBlock x:Name="tbPrenom" Margin="3" Text="{Binding Prenom}"></TextBlock>
+        </StackPanel>-->
+        <Label Content="Employés"/>
+        <ListView ItemsSource="{Binding}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True">
+                    <GridViewColumn Header="Id" Width="50"  DisplayMemberBinding="{Binding Path=Id}"/>
+                    <GridViewColumn Header="Nom" Width="50"  DisplayMemberBinding="{Binding Path=Nom}"/>
+                    <GridViewColumn Header="Prenom" Width="50"  DisplayMemberBinding="{Binding Path=Prenom}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </DockPanel>
 </UserControl>

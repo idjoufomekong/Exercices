@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Liaison.xaml.cs">
+      <DependentUpon>Liaison.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestFlo.xaml.cs">
       <DependentUpon>TestFlo.xaml</DependentUpon>
     </Compile>
@@ -77,6 +80,10 @@
       <DependentUpon>Fenetre1.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Liaison.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TestFlo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

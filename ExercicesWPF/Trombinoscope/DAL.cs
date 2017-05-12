@@ -28,8 +28,8 @@ namespace Trombinoscope
                 {
                     while (reader.Read())
                     {
-                        if(reader["Photo"] != DBNull.Value)
-                        listPhotos.Add(ConvertBytesToImageSource((byte[])reader["Photo"]));
+                        if (reader["Photo"] != DBNull.Value)
+                            listPhotos.Add(ConvertBytesToImageSource((byte[])reader["Photo"]));
                     }
                 }
             }
@@ -50,13 +50,17 @@ namespace Trombinoscope
             }
         }
 
-        //Récupération de la liste des employés
+        //Récupération de la liste des employés avec les territoires associés
         public static List<Employe> GetEmployees()
         {
             var listEmpl = new List<Employe>();
 
             var connectString = Properties.Settings.Default.NorthwindConnectionString;
-            string queryString = @"select EmployeeID,LastName,FirstName from Employees";
+            string queryString = @"select E.EmployeeID,E.LastName,E.FirstName,T.TerritoryID,T.TerritoryDescription
+from Territories T
+inner join EmployeeTerritories ET on ET.TerritoryID=T.TerritoryID
+right outer join Employees E on E.EmployeeID=ET.EmployeeID
+order by EmployeeID";
 
             using (var connect = new SqlConnection(connectString))
             {
@@ -67,7 +71,7 @@ namespace Trombinoscope
                 {
                     while (reader.Read())
                     {
-                        GetEmployesFromDataReader(listEmpl,reader);
+                        GetEmployesFromDataReader(listEmpl, reader);
                     }
                 }
             }
@@ -78,6 +82,8 @@ namespace Trombinoscope
         //Lecture du reader retourné par la requête SQL et construction de l'objet Employé
         private static void GetEmployesFromDataReader(List<Employe> lstEmpl, SqlDataReader reader)
         {
+            int Id= (int)reader["EmployeeID"];
+            
             var emp = new Employe();
             emp.Id = (int)reader["EmployeeID"];
             emp.Nom = (string)reader["LastName"];

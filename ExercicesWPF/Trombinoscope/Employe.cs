@@ -18,5 +18,6 @@ namespace Trombinoscope
                 return Nom + " " + Prenom;
             }
         }
+        public List<Territoire> Territoires { get; set; }
     }
     }

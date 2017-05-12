@@ -20,28 +20,36 @@ namespace Trombinoscope
     /// </summary>
     public partial class UCEmployes : UserControl
     {
-        private List<Employe> _listEmpl;
         public UCEmployes()
         {
             InitializeComponent();
 
-            lbEmp.SelectionChanged += LbEmp_SelectionChanged;
-
-            _listEmpl = DAL.GetEmployees();
-            lbEmp.ItemsSource = _listEmpl;
-                
-                lbEmp.DisplayMemberPath = "NomComplet";
-                //lbEmp.SelectedValuePath = "Id";
-        }
-
-        private void LbEmp_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //int id = (int)lbEmp.SelectedValue;
-            //            var p = _listEmpl.Where(x => x.Id == id).FirstOrDefault();
-            var p = (Employe) lbEmp.SelectedItem;
-            tbId.Text ="Id: "+p.Id.ToString();
-            tbNom.Text = "Nom: "+p.Nom;
-            tbPrenom.Text = "Prénom: "+ p.Prenom;
+            DataContext = DAL.GetEmployees();
         }
     }
 }
+
+/*Sans les dataBindings
+       public UCEmployes()
+       {
+           InitializeComponent();
+
+           lbEmp.SelectionChanged += LbEmp_SelectionChanged;
+
+           _listEmpl = DAL.GetEmployees();
+           lbEmp.ItemsSource = _listEmpl;
+
+               lbEmp.DisplayMemberPath = "NomComplet";
+               ////lbEmp.SelectedValuePath = "Id";
+   }
+
+   //Sans les dataBindings
+   //private void LbEmp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+   //{
+   //    //int id = (int)lbEmp.SelectedValue;
+   //    //            var p = _listEmpl.Where(x => x.Id == id).FirstOrDefault();
+   //    var p = (Employe) lbEmp.SelectedItem;
+   //    tbId.Text ="Id: "+p.Id.ToString();
+   //    tbNom.Text = "Nom: "+p.Nom;
+   //    tbPrenom.Text = "Prénom: "+ p.Prenom;
+   //}*/
