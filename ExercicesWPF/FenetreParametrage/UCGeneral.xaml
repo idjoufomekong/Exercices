@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="FenetreParametrage.UCGeneral"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FenetreParametrage"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DicoImages.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer>
+        <ScrollViewer.Resources>
+            <Style x:Key="StyleSousTitre">
+                <Setter Property="Label.Background" Value="LightGray"/>
+                <Setter Property="Label.FontWeight" Value="Bold"/>
+            </Style>
+            <Style x:Key="StyleUser">
+                <Setter Property="Label.Width" Value="125" />
+            </Style>
+        </ScrollViewer.Resources>
+        <StackPanel>
+            <DockPanel Margin="20,20,0,10">
+                <StaticResource ResourceKey="imgUsers"/>
+                <Label Content="Options générales d'utilisation de Word"/>
+            </DockPanel>
+            <Label Content="Options d'interface utilisateur" Margin="10" Style="{StaticResource StyleSousTitre}"/>
+            <CheckBox Content="Afficher la mini barre d'outils lors de la sélection" Margin="20,0" IsChecked="True"/>
+            <CheckBox Content="Activer l'aperçu instantané" Margin="20,3"/>
+            <CheckBox Content="Mettre à jour le contenu des données pendant leur déplacement" Margin="20,0"/>
+            <StackPanel Margin="20,5" Orientation="horizontal">
+                <Label Content="Style d'info-bulle:"/>
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="Afficher les descriptions des fonctionnalités dans des info-bulles"/>
+                </ComboBox>
+            </StackPanel>
+            <Label Content="Personnaliser votre suite de programmes Microsoft Office" Margin="10" 
+                   Style="{StaticResource StyleSousTitre}"/>
+            <StackPanel Margin="20,5" Orientation="horizontal">
+                <Label Content="Nom d'utilisateur:" Style="{StaticResource StyleUser}"/>
+                <TextBox Text="Cyril Seguenot" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Margin="20,5" Orientation="horizontal">
+                <Label Content="Initiales:" Style="{StaticResource StyleUser}"/>
+                <TextBox Text="CS" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            </StackPanel>
+            <CheckBox Content="Toujours utiliser ces valeurs, quelle que soit l'état de connexion à Office"
+								  Margin="20,3"/>
+            <StackPanel Margin="20,5" Orientation="horizontal">
+                <Label Content="Arrière-plan Office:" Style="{StaticResource StyleUser}"/>
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="Aucun arrière-plan"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="20,5" Orientation="horizontal">
+                <Label Content="Thème Office:" Style="{StaticResource StyleUser}"/>
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="En couleur"/>
+                </ComboBox>
+            </StackPanel>
+            <Label Content="Options de démarrage" Margin="10" Style="{StaticResource StyleSousTitre}"/>
+            <StackPanel Margin="20,5" Orientation="Horizontal">
+                <Label Content="Choisir les extensions que Word doit toujours ouvrir:"/>
+                <Button Content="Programmes que vous souhaitez utiliser" Width="200"/>
+            </StackPanel>
+            <CheckBox Content="Me prévenir si Word n'est pas toujours utilisé pour l'affichage et la modification des documents"
+								  Margin="20,0"/>
+            <CheckBox Content="Ouvrir les pièces jointes et autres fichiers non modifiables en mode plein écran"
+								  Margin="20,3"/>
+            <CheckBox Content="Afficher l'écran de démarrage au lancement de l'application" Margin="20,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
