@@ -16,22 +16,13 @@ using System.Windows.Shapes;
 namespace FenetreParametrage
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UCGeneral.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UCGeneral : UserControl
     {
-        private UCGeneral _ucGeneral;
-        public MainWindow()
+        public UCGeneral()
         {
             InitializeComponent();
-            tiGeneral.Loaded += TiGeneral_Loaded;
-        }
-
-        private void TiGeneral_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (_ucGeneral == null)
-                _ucGeneral = new FenetreParametrage.UCGeneral();
-            tiGeneral.Content = _ucGeneral;
         }
     }
 }

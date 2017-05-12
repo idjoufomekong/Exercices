@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:FenetreParametrage"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="550">
+    <!--<Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DicoImages.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>-->
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="200"/>
@@ -22,38 +29,39 @@
 			<Button Content="OK" Width="70" Height="30"/>
 			<Button  Content="Annuler" Margin="5" Width="70" Height="30"/>
 		</StackPanel>
-		<TabControl TabStripPlacement="Left" Grid.ColumnSpan="2">
-			<TabItem Header="Général">
-				<ScrollViewer>
+		<TabControl TabStripPlacement="Left" Grid.ColumnSpan="2" Name="tcParam">
+			<TabItem Header="Général" Name="tiGeneral">
+				<!--<ScrollViewer>
 					<StackPanel>
 						<DockPanel Margin="20,20,0,10">
-							<Image Source="pack://application:,,,/Images/Users.png" Height="30" VerticalAlignment="Top"/>
-							<Label Content="Options générales d'utilisation de Word"/>
+							--><!--<Image Source="pack://application:,,,/Images/Users.png" Height="30" VerticalAlignment="Top"/>--><!--
+                            <StaticResource ResourceKey="imgUsers"/>
+                            <Label Content="Options générales d'utilisation de Word"/>
 						</DockPanel>
 						<Label Content="Options d'interface utilisateur" Margin="10" Background="Gray"/>
-						<CheckBox Content="Afficher la mini barre d'outils lors de la sélection" Margin="20,0"/>
+						<CheckBox Content="Afficher la mini barre d'outils lors de la sélection" Margin="20,0" IsChecked="True"/>
 						<CheckBox Content="Activer l'aperçu instantané" Margin="20,3"/>
 						<CheckBox Content="Mettre à jour le contenu des données pendant leur déplacement" Margin="20,0"/>
 						<StackPanel Margin="20,5" Orientation="horizontal">
 							<Label Content="Style d'info-bulle:"/>
-							<ComboBox>
+							<ComboBox SelectedIndex="0">
 								<ComboBoxItem Content="Afficher les descriptions des fonctionnalités dans des info-bulles"/>
 							</ComboBox>
 						</StackPanel>
 						<Label Content="Personnaliser votre suite de programmes Microsoft Office" Margin="10" Background="Gray"/>
 						<StackPanel Margin="20,5" Orientation="horizontal">
 							<Label Content="Nom d'utilisateur:"/>
-							<TextBlock Text="Cyril Seguenot"/>
+                            <TextBox Text="Cyril Seguenot" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Margin="20,5" Orientation="horizontal">
 							<Label Content="Initiales:"/>
-							<TextBlock Text="CS"/>
+							<TextBox Text="CS" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 						</StackPanel>
 						<CheckBox Content="Toujours utiliser ces valeurs, quelle que soit l'état de connexion à Office"
 								  Margin="20,3"/>
 						<StackPanel Margin="20,5" Orientation="horizontal">
 							<Label Content="Arrière-plan Office:"/>
-							<ComboBox>
+                            <ComboBox SelectedIndex="0">
 								<ComboBoxItem Content="Aucun arrière-plan"/>
 							</ComboBox>
 						</StackPanel>
@@ -64,19 +72,19 @@
 							</ComboBox>
 						</StackPanel>
 						<Label Content="Options de démarrage" Margin="10" Background="Gray"/>
-						<DockPanel Margin="20,5">
+						<StackPanel Margin="20,5" Orientation="Horizontal">
 							<Label Content="Choisir les extensions que Word doit toujours ouvrir:"/>
-							<Button Content="Programmes que vous souhaitez utiliser"/>
-						</DockPanel>
+							<Button Content="Programmes que vous souhaitez utiliser" Width="200"/>
+						</StackPanel>
 						<CheckBox Content="Me prévenir si Word n'est pas toujours utilisé pour l'affichage et la modification des documents"
 								  Margin="20,0"/>
 						<CheckBox Content="Ouvrir les pièces jointes et autres fichiers non modifiables en mode plein écran"
 								  Margin="20,3"/>
 						<CheckBox Content="Afficher l'écran de démarrage au lancement de l'application" Margin="20,0"/>
 					</StackPanel>
-				</ScrollViewer>
+				</ScrollViewer>-->
 			</TabItem>
-			<TabItem Header="Affichage">
+			<TabItem Header="Affichage" Height="24" VerticalAlignment="Bottom" Margin="-2,-2,0,2">
 			</TabItem>
 			<TabItem Header="Vérification">
 			</TabItem>
