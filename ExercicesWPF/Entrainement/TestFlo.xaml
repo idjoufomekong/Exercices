@@ -8,5 +8,8 @@
         Title="TestFlo" Height="300" Width="300">
     <Grid>
         <!--Coucou je met des trucs inutiles-->
+        <ContentControl></ContentControl>
+        <ContentControl></ContentControl>
+        <ContentControl></ContentControl>
     </Grid>
 </Window>
