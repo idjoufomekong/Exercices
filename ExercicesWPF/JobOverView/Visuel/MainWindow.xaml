@@ -1,0 +1,18 @@
+﻿<Window x:Class="JobOverView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JobOverView"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Name="menuLogiciel" Header="Logiciels" />
+                <MenuItem Name="menuTache" Header="Tâches" />
+            <!--<MenuItem x:Name="menuTrombi" Header="{x:Static resx:Resources.menuTrombi}"/>
+            <MenuItem x:Name="menuEmpl" Header="{x:Static resx:Resources.menuEmpl}"/>-->
+        </Menu>
+        <ContentControl Name="ccContent"/>
+    </DockPanel>
+</Window>

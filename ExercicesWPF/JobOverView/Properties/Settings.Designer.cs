@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Trombinoscope.Properties {
+namespace JobOverView.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,20 +25,11 @@ namespace Trombinoscope.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=IDJOU17-DE\\IP08R2;Initial Catalog=Northwind;Integrated Security=True")]
-        public string NorthwindConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=JobOverview;Integrated Security=" +
+            "True")]
+        public string JOConnectString {
             get {
-                return ((string)(this["NorthwindConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=Northwind;Integrated Security=Tr" +
-            "ue")]
-        public string NorthwindConnectionString1 {
-            get {
-                return ((string)(this["NorthwindConnectionString1"]));
+                return ((string)(this["JOConnectString"]));
             }
         }
     }

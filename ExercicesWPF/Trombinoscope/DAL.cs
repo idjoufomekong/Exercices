@@ -16,7 +16,7 @@ namespace Trombinoscope
         {
             var listPhotos = new List<ImageSource>();
 
-            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            var connectString = Properties.Settings.Default.NorthwindConnectionString1;
             string queryString = @"select Photo from Employees";
 
             using (var connect = new SqlConnection(connectString))
@@ -55,7 +55,7 @@ namespace Trombinoscope
         {
             var listEmpl = new List<Employe>();
 
-            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            var connectString = Properties.Settings.Default.NorthwindConnectionString1;
             string queryString = @"select E.EmployeeID,E.LastName,E.FirstName,T.TerritoryID,T.TerritoryDescription
 from Territories T
 inner join EmployeeTerritories ET on ET.TerritoryID=T.TerritoryID
@@ -82,14 +82,28 @@ order by EmployeeID";
         //Lecture du reader retourné par la requête SQL et construction de l'objet Employé
         private static void GetEmployesFromDataReader(List<Employe> lstEmpl, SqlDataReader reader)
         {
-            int Id= (int)reader["EmployeeID"];
-            
-            var emp = new Employe();
-            emp.Id = (int)reader["EmployeeID"];
-            emp.Nom = (string)reader["LastName"];
-            emp.Prenom = (string)reader["FirstName"];
+            int Id = (int)reader["EmployeeID"];
+            if ((lstEmpl.Count == 0) || (lstEmpl[lstEmpl.Count - 1].Id != Id))
+            {
+                var emp = new Employe();
+                emp.Id = (int)reader["EmployeeID"];
+                emp.Nom = (string)reader["LastName"];
+                emp.Prenom = (string)reader["FirstName"];
 
-            lstEmpl.Add(emp);
+                lstEmpl.Add(emp);
+                emp.Territoires = new List<Territoire>();
+                Id = emp.Id;
+            }
+            if (reader["TerritoryID"] != DBNull.Value)
+            {
+
+            var ter = new Territoire();
+                ter.IdTerritoire = (string)reader["TerritoryID"];
+            if (reader["TerritoryDescription"] != DBNull.Value)
+                ter.NomTerritoire = (string)reader["TerritoryDescription"];
+
+            lstEmpl[lstEmpl.Count - 1].Territoires.Add(ter);
+            }
         }
     }
 }

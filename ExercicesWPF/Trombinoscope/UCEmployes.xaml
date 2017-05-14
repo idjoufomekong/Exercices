@@ -22,12 +22,27 @@
             <TextBlock x:Name="tbPrenom" Margin="3" Text="{Binding Prenom}"></TextBlock>
         </StackPanel>-->
         <Label Content="Employés"/>
-        <ListView ItemsSource="{Binding}">
+        <ListView ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
             <ListView.View>
                 <GridView AllowsColumnReorder="True">
                     <GridViewColumn Header="Id" Width="50"  DisplayMemberBinding="{Binding Path=Id}"/>
                     <GridViewColumn Header="Nom" Width="50"  DisplayMemberBinding="{Binding Path=Nom}"/>
                     <GridViewColumn Header="Prenom" Width="50"  DisplayMemberBinding="{Binding Path=Prenom}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        <!--Territoires de l'employé sélectionné-->
+        <StackPanel >
+            <Label Content="Territoires de l'employé N°"/>
+            <TextBlock Text="{Binding Path=Id}" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Path=Territoires.Count}" VerticalAlignment="Center"/>
+        </StackPanel>
+        <ListView  ItemsSource="{Binding Path=Territoires}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id du territoire" DisplayMemberBinding="{Binding Path=IdTerritoire}"/>
+                    <GridViewColumn Header="Nom du territoire" DisplayMemberBinding="{Binding Path=NomTerritoire}"/>
                 </GridView>
             </ListView.View>
         </ListView>
