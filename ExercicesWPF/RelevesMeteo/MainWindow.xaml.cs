@@ -44,6 +44,7 @@ namespace RelevesMeteo
             {
                 lbMeteo.ItemTemplate = (DataTemplate)Resources["dtListGroupee"];
                 gStats.Visibility = System.Windows.Visibility.Hidden;
+                //ccDetail.Visibility = Visibility.Visible;
             }
         }
 

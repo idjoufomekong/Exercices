@@ -124,11 +124,15 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <ContentControl Name="ccDetail">
-            
-        </ContentControl>
+        <!--<ContentControl Name="ccDetail">-->
+            <ListBox Name="lbDetail" HorizontalContentAlignment="Stretch"
+                      DockPanel.Dock="Bottom" ItemTemplate="{Binding Path=DataTemplate,
+                Converter={StaticResource TemplateConverter},
+                ConverterParameter={StaticResource }}" >
+        </ListBox>
+        <!--</ContentControl>-->
         <ListBox Name="lbMeteo" ItemsSource="{Binding}" ItemTemplate="{StaticResource dtListMeteo}"  
-                 HorizontalContentAlignment="Stretch">
+                 HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
         </ListBox>
     </DockPanel>
 </Window>
