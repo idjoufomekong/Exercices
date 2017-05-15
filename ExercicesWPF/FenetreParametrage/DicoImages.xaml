@@ -2,5 +2,5 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FenetreParametrage">
     <Image x:Key="imgUsers" Height="30" VerticalAlignment="Top"
-        Source="pack://application:,,,/Images/Users.png"/>
+        Source="Images/Users.png"/>
 </ResourceDictionary>

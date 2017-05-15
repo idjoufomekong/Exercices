@@ -6,11 +6,22 @@
              xmlns:local="clr-namespace:Trombinoscope"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <ListBox x:Name="lbPhotos" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <ListBox x:Name="lbPhotos" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding}" >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <StackPanel>
+                <Image Source="{Binding Path= Photo}"  Width="200"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Path= Prenom , StringFormat='\{0\} '}" HorizontalAlignment="Center" Foreground="Blue"/>
+                        <TextBlock Text="{Binding Path= Nom}" HorizontalAlignment="Center" Foreground="Blue"/>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
         </ListBox>
 </UserControl>

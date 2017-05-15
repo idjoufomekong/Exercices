@@ -12,12 +12,12 @@ namespace Trombinoscope
 {
     public class DAL
     {
-        public static List<ImageSource> GetPictures()
+        public static List<Employe> GetEmployees()
         {
-            var listPhotos = new List<ImageSource>();
+            var listEmp = new List<Employe>();
 
-            var connectString = Properties.Settings.Default.NorthwindConnectionString1;
-            string queryString = @"select Photo from Employees";
+            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            string queryString = @"select EmployeeID,LastName,FirstName,Photo from Employees";
 
             using (var connect = new SqlConnection(connectString))
             {
@@ -28,13 +28,18 @@ namespace Trombinoscope
                 {
                     while (reader.Read())
                     {
+                        var emp = new Employe();
+                        emp.Id = (int)reader["EmployeeID"];
+                        emp.Nom = (string)reader["LastName"];
+                        emp.Prenom = (string)reader["FirstName"];
                         if (reader["Photo"] != DBNull.Value)
-                            listPhotos.Add(ConvertBytesToImageSource((byte[])reader["Photo"]));
+                            emp.Photo=ConvertBytesToImageSource((byte[])reader["Photo"]);
+                        listEmp.Add(emp);
                     }
                 }
             }
 
-            return listPhotos;
+            return listEmp;
         }
 
         private static ImageSource ConvertBytesToImageSource(Byte[] tab)
@@ -51,15 +56,17 @@ namespace Trombinoscope
         }
 
         //Récupération de la liste des employés avec les territoires associés
-        public static List<Employe> GetEmployees()
+        public static List<Employe> GetEmployeesTerritories()
         {
             var listEmpl = new List<Employe>();
 
-            var connectString = Properties.Settings.Default.NorthwindConnectionString1;
-            string queryString = @"select E.EmployeeID,E.LastName,E.FirstName,T.TerritoryID,T.TerritoryDescription
+            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            string queryString = @"select E.EmployeeID,E.LastName,E.FirstName,T.TerritoryID,T.TerritoryDescription,E.ReportsTo,
+EM.LastName MLastName, EM.FirstName MFirstName
 from Territories T
 inner join EmployeeTerritories ET on ET.TerritoryID=T.TerritoryID
 right outer join Employees E on E.EmployeeID=ET.EmployeeID
+left outer join Employees EM on E.ReportsTo=EM.EmployeeID
 order by EmployeeID";
 
             using (var connect = new SqlConnection(connectString))
@@ -89,6 +96,12 @@ order by EmployeeID";
                 emp.Id = (int)reader["EmployeeID"];
                 emp.Nom = (string)reader["LastName"];
                 emp.Prenom = (string)reader["FirstName"];
+                if (reader["ReportsTo"] != DBNull.Value)
+                {
+                    emp.IdManager=(int)reader["ReportsTo"];
+                    emp.NomManager= (string)reader["MLastName"];
+                    emp.PrenomManager= (string)reader["MFirstName"];
+                }
 
                 lstEmpl.Add(emp);
                 emp.Territoires = new List<Territoire>();

@@ -1,0 +1,134 @@
+﻿<Window x:Class="RelevesMeteo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RelevesMeteo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="700">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <DataTemplate x:Key="dtListGroupee">
+                <StackPanel>
+                    <TextBlock Text="{Binding Path=Année}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Date, StringFormat='\{0:MMMM\}'}"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1">
+                            <TextBlock Text="Minimale: "/>
+                            <TextBlock Text="{Binding Path=TMin, StringFormat='\{0\} °C'}"/>
+                        </TextBlock>
+                        <TextBlock Grid.Column="2">
+                            <TextBlock Text="Maximale: "/>
+                            <TextBlock Text="{Binding Path=TMax, StringFormat='\{0\} °C'}"/>
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="dtListMeteo">
+                <Border BorderBrush="Purple" BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Date, StringFormat='\{0:MM/yyyy\}'}"/>
+                        <StackPanel Grid.Column="1">
+                            <DockPanel>
+                            <TextBlock Text="&#x23F6;" Margin="2" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Path=TMax, StringFormat='\{0\} °C'}" VerticalAlignment="Center"/>
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Text="&#x23F7;" Margin="2" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Path=TMin, StringFormat='\{0\} °C'}" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <DockPanel>
+                                <TextBlock Text="&#x263C;" Margin="2" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Path=Précipitations, StringFormat='\{0\} mm'}" VerticalAlignment="Center"/>
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Text="&#x1F4A7;" Margin="2" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Path=Ensoleillement, StringFormat='\{0\} h'}" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button Name="btChargerFichier" Content="..." Width="50" DockPanel.Dock="Right" FontWeight="Bold"/>
+            <TextBox Name="tbChoisirFichier"/>
+        </DockPanel>
+        <StackPanel DockPanel.Dock="Top"  Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Vue" VerticalAlignment="Center" Margin="5,0"/>
+            <ComboBox Name="cbVue" Width="150" Height="25" VerticalAlignment="Center" SelectedIndex="0">
+                <ComboBoxItem Name="cbVignettes" Content="Vignettes"/>
+                <ComboBoxItem Name="cbGroupe" Content="Groupée par année"/>
+            </ComboBox>
+        </StackPanel>
+        <Grid Name="gStats" DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="10">
+                <TextBlock Text="Mois le plus froid"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=MoisPlusFroid, StringFormat='\{0:MM/yyyy\}: '}" Margin="-5,5"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Path=TMin, StringFormat='\{0\} °C'}" Margin="5,0" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="10">
+                <TextBlock Text="Mois le plus chaud"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=MoisPlusChaud, StringFormat='\{0:MM/yyyy\}: '}" Margin="-5,5"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Path=TMax, StringFormat='\{0\} °C'}" Margin="5,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="10">
+                <TextBlock Text="Année la plus sèche"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=AnnéePlusSèche, StringFormat='\{0:G\}:'}" Margin="-5,5"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Path=PrécipitationsMin, StringFormat='\{0\} mm'}" VerticalAlignment="Center"
+                               Margin="7,0"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
+                <TextBlock Text="Année la plus humide"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=AnnéePlusHumide, StringFormat='\{0:G\}:'}" Margin="-5,5"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Path=PrécipitationsMax, StringFormat='\{0\} mm'}" VerticalAlignment="Center"
+                               Margin="7,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <ContentControl Name="ccDetail">
+            
+        </ContentControl>
+        <ListBox Name="lbMeteo" ItemsSource="{Binding}" ItemTemplate="{StaticResource dtListMeteo}"  
+                 HorizontalContentAlignment="Stretch">
+        </ListBox>
+    </DockPanel>
+</Window>

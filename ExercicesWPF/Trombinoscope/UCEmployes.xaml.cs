@@ -24,7 +24,7 @@ namespace Trombinoscope
         {
             InitializeComponent();
 
-            DataContext = DAL.GetEmployees();
+            DataContext = DAL.GetEmployeesTerritories();
         }
     }
 }

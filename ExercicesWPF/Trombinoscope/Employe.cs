@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Trombinoscope
 {
@@ -19,5 +20,9 @@ namespace Trombinoscope
             }
         }
         public List<Territoire> Territoires { get; set; }
+        public int IdManager { get; set; }
+        public string NomManager { get; set; }
+        public string PrenomManager { get; set; }
+        public ImageSource Photo { get; set; }
     }
     }

@@ -24,14 +24,8 @@ namespace Trombinoscope
         public UCTrombi()
         {
             InitializeComponent();
-            _listPhotos = DAL.GetPictures();
-            foreach (var a in _listPhotos)
-            {
-                Image photo = new Image();
-                photo.Source = a;
-                photo.Width = 200;
-                lbPhotos.Items.Add(photo);
-            }
+            lbPhotos.DataContext = DAL.GetEmployees();//Pour bien préciser le dataContext qu'on veut pour le contrôle
+            //Cà marche aussi sans lbPhotos.
         }
     }
 }
