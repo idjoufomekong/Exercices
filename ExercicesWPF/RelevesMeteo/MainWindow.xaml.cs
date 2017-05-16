@@ -26,11 +26,13 @@ namespace RelevesMeteo
         public MainWindow()
         {
             InitializeComponent();
-           // Thread.CurrentThread.CurrentCulture = new CultureInfo("FR-FR");
+            Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
             _meteo = new DALMeteo();
 
             btChargerFichier.Click += SelectFichierChargerDonnees;
             cbVue.SelectionChanged += ChoisirVue;
+
+            ccDetail.Visibility = Visibility.Hidden;
         }
 
         private void ChoisirVue(object sender, SelectionChangedEventArgs e)
@@ -38,20 +40,23 @@ namespace RelevesMeteo
             if (cbVue.SelectedIndex == 0)//Sélection du 1er élément de la liste : Vignettes
             {
                 gStats.Visibility = System.Windows.Visibility.Visible;
+                ccDetail.Visibility = Visibility.Hidden;
                 lbMeteo.ItemTemplate = (DataTemplate)Resources["dtListMeteo"];
             }
             else
             {
                 lbMeteo.ItemTemplate = (DataTemplate)Resources["dtListGroupee"];
                 gStats.Visibility = System.Windows.Visibility.Hidden;
-                //ccDetail.Visibility = Visibility.Visible;
+                ccDetail.Visibility = Visibility.Visible;
             }
+            //Au lieu des if
+            //lbMeteo.ItemTemplate = (DataTemplate)Resources[cbVue.SelectedValue];
         }
 
         private void SelectFichierChargerDonnees(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog obj = new Microsoft.Win32.OpenFileDialog();
-            obj.InitialDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            obj.InitialDirectory = System.AppDomain.CurrentDomain.BaseDirectory;//Faire parent directory pour remonter d'un cran
             obj.ShowDialog();
             try
             {
@@ -59,11 +64,12 @@ namespace RelevesMeteo
             tbChoisirFichier.Text = obj.FileName;
                 lbMeteo.DataContext = _meteo.Data;
                 DataContext = _meteo.Stats;
+                ccDetail.DataContext = _meteo.Data;
             }
             catch (Exception exp)
             {
 
-                MessageBox.Show(exp.Message+ "\n"+"Veuillez choisir un fichier", "Erreur", MessageBoxButton.OK);
+                MessageBox.Show(exp.Message+ "\n"+"", "Erreur", MessageBoxButton.OK);
             }
             
         }

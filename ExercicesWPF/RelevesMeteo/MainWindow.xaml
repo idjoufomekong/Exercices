@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RelevesMeteo"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="700">
     <Window.Resources>
@@ -11,6 +12,9 @@
             <Style TargetType="ListBoxItem">
                 <Setter Property="FontSize" Value="14"/>
             </Style>
+            <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <local:DoubleToColorBrushConverter x:Key="DoubleToColorBrushConverter"/>
+            <sys:Double x:Key="PrecipitationSeuil">10</sys:Double>
             <DataTemplate x:Key="dtListGroupee">
                 <StackPanel>
                     <TextBlock Text="{Binding Path=Année}"/>
@@ -21,7 +25,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="{Binding Path=Date, StringFormat='\{0:MMMM\}'}"/>
+                            <TextBlock Text="{Binding Path=Date, StringFormat ='\{0:MMMM\}'}"/>
                         </StackPanel>
                         <TextBlock Grid.Column="1">
                             <TextBlock Text="Minimale: "/>
@@ -35,7 +39,9 @@
                 </StackPanel>
             </DataTemplate>
             <DataTemplate x:Key="dtListMeteo">
-                <Border BorderBrush="Purple" BorderThickness="2">
+                <Border BorderBrush="Purple" BorderThickness="2" Background="{Binding Path=Précipitations,
+                    Converter={StaticResource DoubleToColorBrushConverter},
+                    ConverterParameter={StaticResource PrecipitationSeuil}}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -80,7 +86,8 @@
                 <ComboBoxItem Name="cbGroupe" Content="Groupée par année"/>
             </ComboBox>
         </StackPanel>
-        <Grid Name="gStats" DockPanel.Dock="Bottom">
+        <Grid DockPanel.Dock="Bottom">
+        <Grid Name="gStats" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -97,7 +104,7 @@
                     <TextBlock Text="{Binding Path=TMin, StringFormat='\{0\} °C'}" Margin="5,0" VerticalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
-            <StackPanel Grid.Row="1" Margin="10">
+                <StackPanel Grid.Row="1" Margin="10" >
                 <TextBlock Text="Mois le plus chaud"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Path=MoisPlusChaud, StringFormat='\{0:MM/yyyy\}: '}" Margin="-5,5"
@@ -123,16 +130,20 @@
                                Margin="7,0"/>
                 </StackPanel>
             </StackPanel>
+            </Grid>
+        <ContentControl Name="ccDetail" ContentTemplate="{StaticResource dtListMeteo}" Content="{Binding}"
+                   Visibility="{Binding ElementName=cbGroupe, Path=IsSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+            <!--path= value à rentrer dans le convertisseur-->
+        </ContentControl>
         </Grid>
-        <!--<ContentControl Name="ccDetail">-->
-            <ListBox Name="lbDetail" HorizontalContentAlignment="Stretch"
-                      DockPanel.Dock="Bottom" ItemTemplate="{Binding Path=DataTemplate,
-                Converter={StaticResource TemplateConverter},
-                ConverterParameter={StaticResource }}" >
-        </ListBox>
-        <!--</ContentControl>-->
         <ListBox Name="lbMeteo" ItemsSource="{Binding}" ItemTemplate="{StaticResource dtListMeteo}"  
                  HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
         </ListBox>
     </DockPanel>
 </Window>
+
+<!--<ListBox Name="lbDetail" HorizontalContentAlignment="Stretch"
+                      DockPanel.Dock="Bottom" ItemTemplate="{Binding Path=DataTemplate
+                Converter={StaticResource TemplateConverter},
+                ConverterParameter={StaticResource }--><!--}" >
+</ListBox>--><!---->

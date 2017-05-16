@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace RelevesMeteo
 {
-    public class TemplateConverter : IValueConverter
+    public class BoolToVisibilityConverter : IValueConverter
     {
-        public DataTemplate determinedTemplate { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -23,13 +23,26 @@ namespace RelevesMeteo
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            
-            if (((ComboBox) value).SelectedIndex == 0)
-                determinedTemplate= (DataTemplate) ((ResourceDictionary) parameter)["dtListMeteo"];
-           else
-                determinedTemplate = (DataTemplate)((ResourceDictionary)parameter)["dtListGroupee"];
 
-            return determinedTemplate;
+            Visibility v = ((bool)value ? Visibility.Visible : Visibility.Hidden);
+            return v;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DoubleToColorBrushConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double d = (double)value;
+            double seuil = (double)parameter;
+            Color c = (d < seuil ? Colors.Yellow : Colors.White);
+            return new SolidColorBrush(c);
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

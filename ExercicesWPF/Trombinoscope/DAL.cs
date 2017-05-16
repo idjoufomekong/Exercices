@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -90,7 +91,7 @@ order by EmployeeID";
         private static void GetEmployesFromDataReader(List<Employe> lstEmpl, SqlDataReader reader)
         {
             int Id = (int)reader["EmployeeID"];
-            if ((lstEmpl.Count == 0) || (lstEmpl[lstEmpl.Count - 1].Id != Id))
+            if ((lstEmpl.Count == 0) || lstEmpl.Last().Id!= Id) // (lstEmpl[lstEmpl.Count - 1].Id != Id))
             {
                 var emp = new Employe();
                 emp.Id = (int)reader["EmployeeID"];
@@ -116,6 +117,64 @@ order by EmployeeID";
                 ter.NomTerritoire = (string)reader["TerritoryDescription"];
 
             lstEmpl[lstEmpl.Count - 1].Territoires.Add(ter);
+            }
+        }
+
+        //Ajout d'un employé en BDD
+        public static void AjouterEmploye(Employe emp)
+        {
+            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            string queryString = "insert Employees (LastName,FirstName) values(@prenom,@nom)";
+
+            SqlParameter nom = new SqlParameter("@nom",DbType.String);
+            nom.Value = emp.Nom;
+            SqlParameter prenom = new SqlParameter("@prenom",DbType.String);
+            prenom.Value = emp.Prenom;
+
+            using (var connect = new SqlConnection(connectString))
+            {
+                    connect.Open();
+                SqlTransaction tran = connect.BeginTransaction();
+
+                try
+                {
+                    var command = new SqlCommand(queryString, connect,tran);
+                    command.Parameters.Add(nom);
+                    command.Parameters.Add(prenom);
+
+                    command.ExecuteNonQuery();
+                    tran.Commit();
+                }
+                catch (Exception)
+                {
+                    tran.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        //Suppression d'un employé en BDD
+        public static void SupprimerEmploye(Employe emp)
+        {
+            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            string queryString= "delete from Employees where EmployeeID=@id";
+
+            SqlParameter id = new SqlParameter("@id", DbType.Int16);
+            id.Value = emp.Id;
+
+            using (var connect = new SqlConnection(connectString))
+            {
+                var command = new SqlCommand(queryString, connect);
+                command.Parameters.Add(id);
+                connect.Open();
+                try
+                {
+                command.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
     }
