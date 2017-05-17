@@ -32,16 +32,40 @@ namespace RelevesMeteo
             _meteo = new DALMeteo();
 
             btChargerFichier.Click += SelectFichierChargerDonnees;
-            cbVue.SelectionChanged += ChoisirVue;
+            //cbVue.SelectionChanged += ChoisirVue;
+            //cbTrie.SelectionChanged += ChoisirVue;
+            //cbSensTri.SelectionChanged += ChoisirVue;
+            btFiltre.Click += Filtrer;
 
             ccDetail.Visibility = Visibility.Hidden;
 
-            
+            dpTri.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent,
+            new RoutedEventHandler(ChoisirVue));
+
+
 
         }
 
-        private void ChoisirVue(object sender, SelectionChangedEventArgs e)
+        private void Filtrer(object sender, RoutedEventArgs e)
         {
+            // Applique le filtre à la liste
+            CollectionViewSource.GetDefaultView(_meteo.Data).Filter = FiltrerSurTMin;
+        }
+
+        // Filtre
+        private bool FiltrerSurTMin(object o)
+        {
+            double seuil;
+            if (double.TryParse(tbFiltre.Text, out seuil))
+                return ((DonnéesMois)o).TMin >= seuil;
+
+            return true;
+        }
+
+
+        private void ChoisirVue(object sender, RoutedEventArgs e)//SelectionChangedEventArgs e)
+        {
+            _view = CollectionViewSource.GetDefaultView(_meteo.Data);
             if (cbVue.SelectedIndex == 0)//Sélection du 1er élément de la liste : Vignettes
             {
                 _view.SortDescriptions.Clear();
@@ -49,19 +73,51 @@ namespace RelevesMeteo
                 gStats.Visibility = System.Windows.Visibility.Visible;
                 ccDetail.Visibility = Visibility.Hidden;
                 lbMeteo.ItemTemplate = (DataTemplate)Resources["dtListMeteo"];
+                TrierListe();
             }
             else
             {
-                _view = CollectionViewSource.GetDefaultView(_meteo.Data);
+                _view.SortDescriptions.Clear();
+                _view.GroupDescriptions.Clear();
                 _view.SortDescriptions.Add(new SortDescription("Année", ListSortDirection.Ascending));
                 _view.SortDescriptions.Add(new SortDescription("Mois", ListSortDirection.Ascending));
                 _view.GroupDescriptions.Add(new PropertyGroupDescription("Année"));
                 lbMeteo.ItemTemplate = (DataTemplate)Resources["dtListGroupee"];
                 gStats.Visibility = System.Windows.Visibility.Hidden;
                 ccDetail.Visibility = Visibility.Visible;
+                TrierListe();
             }
             //Au lieu des if
             //lbMeteo.ItemTemplate = (DataTemplate)Resources[cbVue.SelectedValue];
+        }
+
+        private void TrierListe()//object sender, SelectionChangedEventArgs e)
+        {
+            int res = cbTrie.SelectedIndex;
+            var sens = cbSensTri.SelectedIndex == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending;
+            _view.SortDescriptions.Clear();
+
+            if (res == 0)
+            {
+                _view.SortDescriptions.Add(new SortDescription("Année", sens));
+                _view.SortDescriptions.Add(new SortDescription("Mois", sens));
+            }
+            else if (res == 1)
+            {
+                _view.SortDescriptions.Add(new SortDescription("TMin", sens));
+            }
+            else if (res == 2)
+            {
+                _view.SortDescriptions.Add(new SortDescription("TMax", sens));
+            }
+            else if (res == 3)
+            {
+                _view.SortDescriptions.Add(new SortDescription("Précipitations", sens));
+            }
+            else if (res == 4)
+            {
+                _view.SortDescriptions.Add(new SortDescription("Ensoleillement", sens));
+            }
         }
 
         private void SelectFichierChargerDonnees(object sender, RoutedEventArgs e)
@@ -71,8 +127,8 @@ namespace RelevesMeteo
             obj.ShowDialog();
             try
             {
-            _meteo.ChargerDonnées(obj.FileName);
-            tbChoisirFichier.Text = obj.FileName;
+                _meteo.ChargerDonnées(obj.FileName);
+                tbChoisirFichier.Text = obj.FileName;
                 lbMeteo.DataContext = _meteo.Data;
                 DataContext = _meteo.Stats;
                 ccDetail.DataContext = _meteo.Data;
@@ -80,9 +136,9 @@ namespace RelevesMeteo
             catch (Exception exp)
             {
 
-                MessageBox.Show(exp.Message+ "\n"+"", "Erreur", MessageBoxButton.OK);
+                MessageBox.Show(exp.Message + "\n" + "", "Erreur", MessageBoxButton.OK);
             }
-            
+
         }
     }
 }

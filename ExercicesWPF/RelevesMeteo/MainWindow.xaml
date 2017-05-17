@@ -80,15 +80,26 @@
             <Button Name="btChargerFichier" Content="..." Width="50" DockPanel.Dock="Right" FontWeight="Bold"/>
             <TextBox Name="tbChoisirFichier"/>
         </DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-            <StackPanel   Orientation="Horizontal" Margin="10">
-                <TextBlock Text="Vue" VerticalAlignment="Center" Margin="5,0"/>
-                <ComboBox Name="cbTrie" Width="150" Height="25" VerticalAlignment="Center" SelectedIndex="0">
-                    <ComboBoxItem Name="cbVignettes" Content="Vignettes"/>
-                    <ComboBoxItem Name="cbGroupe" Content="Groupée par année"/>
+        <DockPanel DockPanel.Dock="Top" Margin="5" Name="dpTri" ListBoxItem.Selected="ChoisirVue">
+            <ComboBox Name="cbSensTri" Width="40" Height="25" VerticalAlignment="Center" DockPanel.Dock="Right">
+                <ComboBoxItem Name="cbAsc" Content="&#x25b2;" IsSelected="True" />
+                <ComboBoxItem Name="cbDesc" Content="&#x25bc;"/>
+            </ComboBox>
+            <StackPanel   Orientation="Horizontal"  DockPanel.Dock="Right">
+                <TextBlock Text="Trier par" VerticalAlignment="Center" Margin="5,0"/>
+                <ComboBox Name="cbTrie" Width="150" Height="25" VerticalAlignment="Center">
+                    <ComboBoxItem Name="cbMois" Content="Mois" IsSelected="True" Tag="Mois"/>
+                    <ComboBoxItem Name="cbTmin" Content="T° min" Tag="Tmin"/>
+                    <ComboBoxItem Name="cbTmax" Content="T° max" Tag="Tmax"/>
+                    <ComboBoxItem Name="cbPrécipitations" Content="Précipitations" Tag="Precipitations"/>
+                    <ComboBoxItem Name="cbEnsoleillement" Content="Durée ensoleillement" Tag="Ensoleillement"/>
                 </ComboBox>
             </StackPanel>
-            <StackPanel   Orientation="Horizontal" Margin="10">
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="5">
+                <TextBox Name="tbFiltre" Width="25"/>
+                <Button Content="FiltrerTMin" Name="btFiltre"/>
+            </StackPanel>
+            <StackPanel   Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Vue" VerticalAlignment="Center" Margin="5,0"/>
                 <ComboBox Name="cbVue" Width="150" Height="25" VerticalAlignment="Center" SelectedIndex="0">
                     <ComboBoxItem Name="cbVignettes" Content="Vignettes"/>
