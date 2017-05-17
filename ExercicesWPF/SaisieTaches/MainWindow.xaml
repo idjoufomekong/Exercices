@@ -8,6 +8,9 @@
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <local:DebugDummyConverter x:Key="DebugDummyConverter"/>
+        <local:ConvModeEditActivation x:Key="ConvModeEditActivation"/>
+        <local:ConvModeEditLectureSeule x:Key="ConvModeEditLectureSeule"/>
+        <local:ConvIdToSelectedIndex x:Key="ConvIdToSelectedIndex"/>
     </Window.Resources>
     <DockPanel>
         <Expander ExpandDirection="left" BorderThickness="1" BorderBrush="Purple" IsExpanded="False" DockPanel.Dock="Right">
@@ -28,26 +31,30 @@
                 </DockPanel>
                 <StackPanel>
                     <Label Content="Echéance" Margin="5,0"/>
-                    <DatePicker/>
+                    <DatePicker IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}"/>
                 </StackPanel>
                 <DockPanel>
-                    <CheckBox Content="Fait" IsChecked="{Binding Path=Taches/Fait}" DockPanel.Dock="Right" VerticalAlignment="Center"/>
+                    <CheckBox Content="Fait" IsChecked="{Binding Path=Taches/Fait}" DockPanel.Dock="Right" VerticalAlignment="Center"
+                              IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}"/>
 
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Priorité"/>
-                        <TextBox Text="{Binding Path=Taches/Prio}" VerticalContentAlignment="Center" Margin="0,5"/>
+                        <TextBox Text="{Binding Path=Taches/Prio}" VerticalContentAlignment="Center" Margin="0,5"
+                                 IsReadOnly="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}"/>
                     </StackPanel>
                 </DockPanel>
                 <Border Width="200" BorderBrush="Gray" BorderThickness="1" Height="100">
                 <ScrollViewer>
-                <TextBlock TextWrapping="Wrap" Text="{Binding Path=Taches/Description}"/>
+                <TextBox TextWrapping="Wrap" Text="{Binding Path=Taches/Description}" 
+                         IsReadOnly="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}"/>
                 </ScrollViewer>
                 </Border>
             </StackPanel>
         </Expander>
         <StackPanel>
             <TextBlock Text="Liste des tâches"/>
-            <ListView ItemsSource="{Binding Path=Taches}" IsSynchronizedWithCurrentItem="True">
+            <ListView ItemsSource="{Binding Path=Taches}" IsSynchronizedWithCurrentItem="True" Name="lvTache" SelectedIndex="3">
+                <!--SelectedIndex="{Binding Path=Taches/Id, Converter={StaticResource ConvIdToSelectedIndex}}">-->
                 <ListView.View>
                     <GridView AllowsColumnReorder="True">
                         <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>

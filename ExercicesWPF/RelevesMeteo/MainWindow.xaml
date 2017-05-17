@@ -170,7 +170,6 @@
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </ListView.GroupStyle>
-
         </ListView>
     </DockPanel>
 </Window>

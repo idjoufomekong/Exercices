@@ -10,34 +10,31 @@ using System.Windows.Input;
 
 namespace SaisieTaches
 { public enum ModesEdition {Consultation, Edition};
-    public class Contexte: INotifyPropertyChanged
+    public class Contexte: ViewModelBase
     {
-        //Evènements
-        public event PropertyChangedEventHandler PropertyChanged;
-
         //Variables privées
         private ModesEdition _modeEdition;
+        private List<Tache> _tachesAjoutees;
         //Propriétés
-        public ObservableCollection<Tache> Taches { get; private set; }
+        public ObservableCollection<Tache> Taches
+        {
+            get;
+            private set;
+        }
         public ModesEdition ModeEdit
         {
             get { return _modeEdition; }
             private set
             {
-                _modeEdition = value;
-                RaisePropertyChanged();
+                SetProperty(ref _modeEdition, value);
             }
-        }
-        private void RaisePropertyChanged([CallerMemberName] string prop = null)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         #region Constructeur
         public Contexte()
         {
-            Taches = new ObservableCollection<SaisieTaches.Tache>(AccesDonnees.ChargerTaches());
+            Taches = new ObservableCollection<Tache>(AccesDonnees.ChargerTaches());
+            _tachesAjoutees = new List<Tache>();
         }
         #endregion
         #region Commandes
@@ -96,18 +93,27 @@ namespace SaisieTaches
         private void AjouterTache(Object o)
         {
             ModeEdit = ModesEdition.Edition;
+            var p = Taches.Max(x => x.Id);
+            Tache t = new Tache();
+            t.Id = p + 1;
+            t.Creation = DateTime.Now;
+            t.Prio = 1;
+            t.Term = DateTime.Now;
+            Taches.Add(t);
+            _tachesAjoutees.Add(t);
         }
         private void SupprimerTache(Object o)
         {
-            throw new NotImplementedException();
+            ModeEdit = ModesEdition.Edition;
         }
         private void EnregistrerTache(Object o)
         {
-            throw new NotImplementedException();
+            ModeEdit = ModesEdition.Consultation;
+            AccesDonnees.EnregistrerTaches(_tachesAjoutees);
         }
         private void AnnulerTache(Object o)
         {
-            throw new NotImplementedException();
+            ModeEdit = ModesEdition.Consultation;
         }
         #endregion
     }

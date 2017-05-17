@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CollectionsBD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tache Id="5" Creation="2017-05-18T01:07:07.628851+02:00" Term="2017-05-18T01:07:07.628851+02:00" Prio="1" Fait="false" />
+  <Tache Id="6" Creation="2017-05-18T01:07:10.006432+02:00" Term="2017-05-18T01:07:10.006432+02:00" Prio="1" Fait="false" />
+  <Tache Id="7" Creation="2017-05-18T01:07:12.5902393+02:00" Term="2017-05-18T01:07:12.5902393+02:00" Prio="1" Fait="false" />
+  <Tache Id="8" Creation="2017-05-18T01:07:14.9434414+02:00" Term="2017-05-18T01:07:14.9434414+02:00" Prio="1" Fait="false" />
+</CollectionsBD>

@@ -24,5 +24,17 @@ namespace SaisieTaches
 
             return listTache;
         }
+
+        public static void EnregistrerTaches(List<Tache> listTache)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Tache>),
+                             new XmlRootAttribute("CollectionsBD"));
+
+            using (var sw = new StreamWriter(@"..\..\AjoutTaches.xml"))
+            {
+                serializer.Serialize(sw, listTache);
+            }
+
+        }
     }
 }
