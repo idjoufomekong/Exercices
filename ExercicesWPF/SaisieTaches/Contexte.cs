@@ -33,10 +33,13 @@ namespace SaisieTaches
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        #region Constructeur
         public Contexte()
         {
             Taches = new ObservableCollection<SaisieTaches.Tache>(AccesDonnees.ChargerTaches());
         }
+        #endregion
         #region Commandes
         //Variables
         private ICommand _cmdAjouter;
@@ -92,7 +95,7 @@ namespace SaisieTaches
         #region Méthodes
         private void AjouterTache(Object o)
         {
-            throw new NotImplementedException();
+            ModeEdit = ModesEdition.Edition;
         }
         private void SupprimerTache(Object o)
         {

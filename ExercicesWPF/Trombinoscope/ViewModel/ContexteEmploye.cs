@@ -13,12 +13,9 @@ using System.Windows.Input;
 
 namespace Trombinoscope
 {
-    public class ContexteEmploye : INotifyPropertyChanged
+    public class ContexteEmploye : ViewModelBase
     {
-        //Implémentation de l'interface
-        #region Evènements
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
+      
 
         //Variables privées
         #region Champs privés
@@ -65,11 +62,7 @@ namespace Trombinoscope
             get { return _nouvelEmploye; }
             private set
             {
-                if (value != _nouvelEmploye)
-                {
-                    _nouvelEmploye = value;
-                    RaisePropertyChanged();
-                }
+                SetProperty(ref _nouvelEmploye, value);
             }
         }
 
@@ -80,12 +73,7 @@ namespace Trombinoscope
             Employes = new ObservableCollection<Employe>(DAL.GetEmployeesTerritories());
             NouvelEmploye = new Employe();
         }
-        private void RaisePropertyChanged([CallerMemberName] string prop = null)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
+        
         private void AjouterEmploye(Object o)
         {
             //if (!string.IsNullOrEmpty(NouvelEmploye.Nom) && !string.IsNullOrEmpty(NouvelEmploye.Prenom))

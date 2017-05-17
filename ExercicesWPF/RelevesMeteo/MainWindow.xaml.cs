@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace RelevesMeteo
     public partial class MainWindow : Window
     {
         private DALMeteo _meteo;
+        private ICollectionView _view;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,18 +35,27 @@ namespace RelevesMeteo
             cbVue.SelectionChanged += ChoisirVue;
 
             ccDetail.Visibility = Visibility.Hidden;
+
+            
+
         }
 
         private void ChoisirVue(object sender, SelectionChangedEventArgs e)
         {
             if (cbVue.SelectedIndex == 0)//Sélection du 1er élément de la liste : Vignettes
             {
+                _view.SortDescriptions.Clear();
+                _view.GroupDescriptions.Clear();
                 gStats.Visibility = System.Windows.Visibility.Visible;
                 ccDetail.Visibility = Visibility.Hidden;
                 lbMeteo.ItemTemplate = (DataTemplate)Resources["dtListMeteo"];
             }
             else
             {
+                _view = CollectionViewSource.GetDefaultView(_meteo.Data);
+                _view.SortDescriptions.Add(new SortDescription("Année", ListSortDirection.Ascending));
+                _view.SortDescriptions.Add(new SortDescription("Mois", ListSortDirection.Ascending));
+                _view.GroupDescriptions.Add(new PropertyGroupDescription("Année"));
                 lbMeteo.ItemTemplate = (DataTemplate)Resources["dtListGroupee"];
                 gStats.Visibility = System.Windows.Visibility.Hidden;
                 ccDetail.Visibility = Visibility.Visible;

@@ -11,9 +11,9 @@
             <Menu DockPanel.Dock="Top">
                 <!--<MenuItem Name="menuTrombi" Header="Trombinoscope" />
                 <MenuItem Name="menuEmpl" Header="Employés" />-->
-            <MenuItem x:Name="menuTrombi" Header="{x:Static resx:Resources.menuTrombi}"/>
-            <MenuItem x:Name="menuEmpl" Header="{x:Static resx:Resources.menuEmpl}"/>
+            <MenuItem x:Name="menuTrombi" Header="{x:Static resx:Resources.menuTrombi}" />
+            <MenuItem x:Name="menuEmpl" Header="{x:Static resx:Resources.menuEmpl}" Command="{Binding CmdEmploye}"/>
         </Menu>
-            <ContentControl Name="ccContent"/>
+            <ContentControl Name="ccContent" Content="{Binding Path=VMCourante}"/>
         </DockPanel>
 </Window>

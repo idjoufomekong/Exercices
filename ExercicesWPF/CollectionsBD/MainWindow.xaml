@@ -1,0 +1,73 @@
+﻿<Window x:Class="CollectionsBD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CollectionsBD"
+        mc:Ignorable="d"
+        Title="Bandes dessinées" Height="600" Width="500">
+    <Window.Resources>
+        <local:CollectionToImageNameConverter x:Key="CollectionToImageNameConverter"/>
+        <AlternationConverter x:Key="BackgroundConverter">
+            <SolidColorBrush>Blue</SolidColorBrush>
+            <SolidColorBrush>CornflowerBlue</SolidColorBrush>
+        </AlternationConverter>
+        <Style x:Key="alternatingWithBinding" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" 
+              Value="{Binding RelativeSource={RelativeSource Self},
+                     Path=(ItemsControl.AlternationIndex),
+                     Converter={StaticResource BackgroundConverter}}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Tag="F" Content=" |&#x25C4;" Command="{Binding CmdNavigation}" CommandParameter="F"/>
+            <Button Tag="P" Content=" &#x25C4;" Command="{Binding CmdNavigation}" CommandParameter="P"/>
+            <Button Tag="N" Content=" &#x25BA; " Command="{Binding CmdNavigation}" CommandParameter="N"/>
+            <Button Tag="L" Content=" |&#x25BA; " Command="{Binding CmdNavigation}" CommandParameter="L" />
+        </StackPanel>
+        <DockPanel Grid.Row="1">
+            <TextBlock DockPanel.Dock="Right" Text="albums" FontWeight="Bold"/>
+            <TextBlock DockPanel.Dock="Right" Text="{Binding Path=CollectionsBD/Albums.Count}" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Path=CollectionsBD/Nom}" HorizontalAlignment="Center" 
+                        Foreground="BlueViolet" FontSize="20"/>
+        </DockPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Name="imCollection" Source="{Binding Path=CollectionsBD/Nom, Converter={StaticResource CollectionToImageNameConverter}}"/>
+            <TextBlock Grid.Column="1" Text="Genres" Margin="2,0,1,5" FontWeight="Bold"/>
+            <ListBox Grid.Column="1" Name="lbGenres" ItemsSource="{Binding Path=CollectionsBD/Genres}" DisplayMemberPath="Libelle" Margin="10,30">
+            </ListBox>
+            <TextBlock Grid.Column="2" Text="Auteurs" Margin="2,0,1,5" FontWeight="Bold"/>
+            <ListBox Grid.Column="2" Name="lbAuteurs" ItemsSource="{Binding Path=CollectionsBD/Auteurs}" DisplayMemberPath="Nom" Margin="10,30">
+            </ListBox>
+        </Grid>
+        <ListView Grid.Row="3" ItemsSource="{Binding Path=CollectionsBD/Albums}" AlternationCount="2"
+                  ItemContainerStyle="{StaticResource alternatingWithBinding}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="N°" DisplayMemberBinding="{Binding Path=Id}"/>
+                    <GridViewColumn Header="Année" DisplayMemberBinding="{Binding Path=Année}"/>
+                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Titre}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

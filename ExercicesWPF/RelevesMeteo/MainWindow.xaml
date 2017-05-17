@@ -15,9 +15,10 @@
             <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <local:DoubleToColorBrushConverter x:Key="DoubleToColorBrushConverter"/>
             <sys:Double x:Key="PrecipitationSeuil">10</sys:Double>
+            <DataTemplate x:Key="dtEnTeteGroupement">
+            </DataTemplate>
             <DataTemplate x:Key="dtListGroupee">
                 <StackPanel>
-                    <TextBlock Text="{Binding Path=Année}"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -42,16 +43,16 @@
                 <Border BorderBrush="Purple" BorderThickness="2" Background="{Binding Path=Précipitations,
                     Converter={StaticResource DoubleToColorBrushConverter},
                     ConverterParameter={StaticResource PrecipitationSeuil}}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Path=Date, StringFormat='\{0:MM/yyyy\}'}"/>
                         <StackPanel Grid.Column="1">
                             <DockPanel>
-                            <TextBlock Text="&#x23F6;" Margin="2" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x23F6;" Margin="2" VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding Path=TMax, StringFormat='\{0\} °C'}" VerticalAlignment="Center"/>
                             </DockPanel>
                             <DockPanel>
@@ -79,71 +80,94 @@
             <Button Name="btChargerFichier" Content="..." Width="50" DockPanel.Dock="Right" FontWeight="Bold"/>
             <TextBox Name="tbChoisirFichier"/>
         </DockPanel>
-        <StackPanel DockPanel.Dock="Top"  Orientation="Horizontal" Margin="10">
-            <TextBlock Text="Vue" VerticalAlignment="Center" Margin="5,0"/>
-            <ComboBox Name="cbVue" Width="150" Height="25" VerticalAlignment="Center" SelectedIndex="0">
-                <ComboBoxItem Name="cbVignettes" Content="Vignettes"/>
-                <ComboBoxItem Name="cbGroupe" Content="Groupée par année"/>
-            </ComboBox>
-        </StackPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <StackPanel   Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Vue" VerticalAlignment="Center" Margin="5,0"/>
+                <ComboBox Name="cbTrie" Width="150" Height="25" VerticalAlignment="Center" SelectedIndex="0">
+                    <ComboBoxItem Name="cbVignettes" Content="Vignettes"/>
+                    <ComboBoxItem Name="cbGroupe" Content="Groupée par année"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel   Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Vue" VerticalAlignment="Center" Margin="5,0"/>
+                <ComboBox Name="cbVue" Width="150" Height="25" VerticalAlignment="Center" SelectedIndex="0">
+                    <ComboBoxItem Name="cbVignettes" Content="Vignettes"/>
+                    <ComboBoxItem Name="cbGroupe" Content="Groupée par année"/>
+                </ComboBox>
+            </StackPanel>
+        </DockPanel>
         <Grid DockPanel.Dock="Bottom">
-        <Grid Name="gStats" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="10">
-                <TextBlock Text="Mois le plus froid"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=MoisPlusFroid, StringFormat='\{0:MM/yyyy\}: '}" Margin="-5,5"
+            <Grid Name="gStats" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="10">
+                    <TextBlock Text="Mois le plus froid"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=MoisPlusFroid, StringFormat='\{0:MM/yyyy\}: '}" Margin="-5,5"
                                VerticalAlignment="Center" />
-                    <TextBlock Text="{Binding Path=TMin, StringFormat='\{0\} °C'}" Margin="5,0" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Path=TMin, StringFormat='\{0\} °C'}" Margin="5,0" VerticalAlignment="Center" />
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
                 <StackPanel Grid.Row="1" Margin="10" >
-                <TextBlock Text="Mois le plus chaud"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=MoisPlusChaud, StringFormat='\{0:MM/yyyy\}: '}" Margin="-5,5"
+                    <TextBlock Text="Mois le plus chaud"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=MoisPlusChaud, StringFormat='\{0:MM/yyyy\}: '}" Margin="-5,5"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Path=TMax, StringFormat='\{0\} °C'}" Margin="5,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=TMax, StringFormat='\{0\} °C'}" Margin="5,0" VerticalAlignment="Center"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Margin="10">
-                <TextBlock Text="Année la plus sèche"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=AnnéePlusSèche, StringFormat='\{0:G\}:'}" Margin="-5,5"
+                <StackPanel Grid.Column="1" Margin="10">
+                    <TextBlock Text="Année la plus sèche"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=AnnéePlusSèche, StringFormat='\{0:G\}:'}" Margin="-5,5"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Path=PrécipitationsMin, StringFormat='\{0\} mm'}" VerticalAlignment="Center"
+                        <TextBlock Text="{Binding Path=PrécipitationsMin, StringFormat='\{0\} mm'}" VerticalAlignment="Center"
                                Margin="7,0"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
-                <TextBlock Text="Année la plus humide"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=AnnéePlusHumide, StringFormat='\{0:G\}:'}" Margin="-5,5"
+                <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
+                    <TextBlock Text="Année la plus humide"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=AnnéePlusHumide, StringFormat='\{0:G\}:'}" Margin="-5,5"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Path=PrécipitationsMax, StringFormat='\{0\} mm'}" VerticalAlignment="Center"
+                        <TextBlock Text="{Binding Path=PrécipitationsMax, StringFormat='\{0\} mm'}" VerticalAlignment="Center"
                                Margin="7,0"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
             </Grid>
-        <ContentControl Name="ccDetail" ContentTemplate="{StaticResource dtListMeteo}" Content="{Binding}"
+            <ContentControl Name="ccDetail" ContentTemplate="{StaticResource dtListMeteo}" Content="{Binding}"
                    Visibility="{Binding ElementName=cbGroupe, Path=IsSelected, Converter={StaticResource BoolToVisibilityConverter}}">
-            <!--path= value à rentrer dans le convertisseur-->
-        </ContentControl>
+                <!--path= value à rentrer dans le convertisseur-->
+            </ContentControl>
         </Grid>
-        <ListBox Name="lbMeteo" ItemsSource="{Binding}" ItemTemplate="{StaticResource dtListMeteo}"  
+        <ListView Name="lbMeteo" ItemsSource="{Binding}" ItemTemplate="{StaticResource dtListMeteo}"  
                  HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
-        </ListBox>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Background="LightSteelBlue" FontWeight="Bold" Padding="3">
+                  <TextBlock Text="{Binding Path=Name}"/>
+               </TextBlock>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+
+        </ListView>
     </DockPanel>
 </Window>
 
 <!--<ListBox Name="lbDetail" HorizontalContentAlignment="Stretch"
                       DockPanel.Dock="Bottom" ItemTemplate="{Binding Path=DataTemplate
                 Converter={StaticResource TemplateConverter},
-                ConverterParameter={StaticResource }--><!--}" >
-</ListBox>--><!---->
+                ConverterParameter={StaticResource }-->
+<!--}" >
+</ListBox>-->
+<!---->
